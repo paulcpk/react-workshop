@@ -24,7 +24,6 @@
 }
 
 .app-header,
-.app-content,
 .app-footer {
   min-height: 3rem;
   display: flex;

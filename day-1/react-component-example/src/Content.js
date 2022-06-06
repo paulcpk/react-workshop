@@ -4,7 +4,7 @@ function renderParagraphs(count) {
 
   for (let i = 0; i < count; i++) {
     output.push(
-      <p>
+      <p key={i}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </p>
