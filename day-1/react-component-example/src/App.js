@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
@@ -8,7 +7,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      <Content />
+      <Content paragraphs={3} />
       <Footer />
     </div>
   );
