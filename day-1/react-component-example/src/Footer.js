@@ -1,9 +1,5 @@
 function Footer() {
-  return (
-    <footer className="app-footer">
-      Copyright React &amp; 2022
-    </footer>
-  );
+  return <footer className="app-footer">Copyright React &copy; 2022</footer>
 }
 
-export default Footer;
+export default Footer

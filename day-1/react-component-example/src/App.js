@@ -1,7 +1,7 @@
-import Header from './Header';
-import Content from './Content';
-import Footer from './Footer';
-import './App.css';
+import Header from './Header'
+import Content from './Content'
+import Footer from './Footer'
+import './App.css'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Content paragraphs={3} />
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

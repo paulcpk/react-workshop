@@ -1,4 +1,3 @@
-
 function Nav() {
   return (
     <nav className="app-nav">
@@ -35,7 +34,7 @@ function Nav() {
         </li>
       </ul>
     </nav>
-  );
+  )
 }
 
-export default Nav;
+export default Nav

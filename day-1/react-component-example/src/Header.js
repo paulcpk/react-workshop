@@ -1,5 +1,5 @@
-import logo from "./logo.svg";
-import Nav from "./Nav";
+import logo from './logo.svg'
+import Nav from './Nav'
 
 function Header() {
   return (
@@ -7,7 +7,7 @@ function Header() {
       <img src={logo} className="app-logo" alt="logo" />
       <Nav />
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header
