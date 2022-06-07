@@ -1,5 +1,8 @@
 import FunctionCar from './FunctionalCar'
 import ClassCar from './ClassCar'
+import FuncBtn from './FunctionalBtn'
+import ClassBtn from './ClassBtn'
+import Mood from './ClassMood'
 
 // helper function for generation of dummy text
 function renderParagraphs(count) {
@@ -24,6 +27,9 @@ function Content(props) {
       {renderParagraphs(props.paragraphs)}
       <FunctionCar color="red" />
       <ClassCar color="yellow" />
+      <FuncBtn />
+      <ClassBtn />
+      <Mood />
     </section>
   )
 }
