@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Btn() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log('count', count);
+  }, [count])
 
   return (
     <button

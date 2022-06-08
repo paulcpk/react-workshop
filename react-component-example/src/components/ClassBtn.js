@@ -8,6 +8,11 @@ export default class Btn extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    // state updated
+    console.log('this.state.count', this.state.count);
+  }
+
   render() {
     return (
       <button

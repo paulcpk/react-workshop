@@ -10,16 +10,23 @@ export default class Posts extends React.Component {
   }
 
   componentDidMount() {
+    // initialized / mounted
     fetch('/posts.json')
       .then((response) => response.json())
       .then((posts) => {
-        console.log('posts', posts)
         this.setState({ posts })
       })
   }
 
+  componentDidUpdate() {
+    // state updated
+  }
+
+  componentWillUnmount() {
+    // destroyed / unmounted
+  }
+
   formatPosts(posts) {
-    console.log('posts', posts)
     return posts.map((post, i) => <p key={i}>{post.data}</p>)
   }
 
