@@ -13,22 +13,22 @@ const DEFAULT_TASKS = [
   {
     id: 1,
     task: 'Finish homework',
-    completed: false,
+    complete: false,
   },
   {
     id: 1,
     task: 'Wash dishes',
-    completed: false,
+    complete: false,
   },
   {
     id: 1,
     task: 'Clean room',
-    completed: false,
+    complete: false,
   },
   {
     id: 1,
     task: 'Make waffles',
-    completed: false,
+    complete: false,
   },
 ]
 
@@ -45,6 +45,7 @@ const App = () => {
   const [formInput, setFormInput] = useState('')
   const taskId = useRef(DEFAULT_ID)
 
+
   const handleChange = (e) => {
     setFormInput(e.target.value)
   }
@@ -55,9 +56,8 @@ const App = () => {
       const newTask = {
         id: taskId,
         task: formInput,
-        completed: false,
+        complete: false,
       }
-      console.log(newTask)
       // increment taskId
       taskId.current++
       setTasks([...tasks, newTask])
@@ -67,12 +67,13 @@ const App = () => {
 
   const handleComplete = (index) => {
     const newTasks = [...tasks]
-    if (newTasks[index].completed === false) {
-      newTasks[index].completed = true
+    if (newTasks[index].complete === false) {
+      newTasks[index].complete = true
     } else {
-      newTasks[index].completed = false
+      newTasks[index].complete = false
     }
     setTasks(newTasks)
+    console.log(newTasks)
   }
 
   const handleRemove = (index) => {
@@ -81,16 +82,13 @@ const App = () => {
     setTasks(newTasks)
   }
 
-  const handleRemoveAll = () => {
-    setTasks([])
-  }
 
   return (
     <div className="app">
       <ThemeProvider theme={lightTheme}>
         <Container maxWidth="sm">
           <header className="app-header">
-            <h2>Todo app powered by React + Vite</h2>
+            <h2>Todo app powered by React + Vite + MUI</h2>
           </header>
           <Box
             sx={{
@@ -101,7 +99,6 @@ const App = () => {
               tasks={tasks}
               handleComplete={handleComplete}
               handleRemove={handleRemove}
-              handleRemoveAll={handleRemoveAll}
             />
 
             <TodoForm
