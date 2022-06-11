@@ -6,3 +6,13 @@
     display: block;
     margin-bottom: 1rem;
 }
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav ul li {
+    display: inline-block;
+    margin: 1rem;
+}
