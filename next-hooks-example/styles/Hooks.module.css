@@ -16,3 +16,14 @@
     display: inline-block;
     margin: 1rem;
 }
+
+.form {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.form input,
+.form select {
+    margin-top: 1rem;
+}
