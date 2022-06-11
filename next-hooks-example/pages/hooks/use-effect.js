@@ -31,10 +31,10 @@ function User(props) {
   }, []);
 
   if (isOnline === null) {
-    return "Loading...";
+    output = "Loading...";
+  } else {
+    output = isOnline ? "Online" : "Offline";
   }
-
-  output = isOnline ? "Online" : "Offline";
 
   return (
     <div className={hookStyles.user}>
