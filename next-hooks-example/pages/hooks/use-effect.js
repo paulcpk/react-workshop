@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useLayoutEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
@@ -43,7 +44,40 @@ function User(props) {
   );
 }
 
-export default function Test() {
+function TodoList() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/todos`)
+      .then((result) => {
+        setData(result.data.slice(0, 10));
+      })
+      .catch(console.error);
+  }, []);
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <ul>
+      {data.map((todo) => (
+        <li key={todo.id}>
+          <span
+            style={{
+              textDecoration: todo.completed ? "line-through" : "none",
+            }}
+          >
+            {todo.title}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function App() {
   const [name, setName] = useState("World");
   const [showUsers, setShowUsers] = useState(true);
 
@@ -65,6 +99,10 @@ export default function Test() {
         <button onClick={() => setName("James")}>
           Click me to change the name
         </button>
+
+        <h2>Todo List API call</h2>
+        <TodoList />
+
         <h2>Subscribe/Unsubscribe</h2>
 
         {showUsers && (

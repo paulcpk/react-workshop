@@ -44,7 +44,7 @@ function ExpensiveCounter({ initialCount }) {
   );
 }
 
-export default function Test() {
+export default function App() {
   return (
     <div className={styles.container}>
       <Head>
