@@ -1,9 +1,8 @@
 import React, { useReducer } from "react";
 import Head from "next/head";
 import styles from "../../styles/Home.module.css";
-import hookStyles from "../../styles/Hooks.module.css";
 
-const initialState = { count: 42, fontSize: 16 };
+const initialState = { count: 42, fontSize: 16, highlight: false };
 
 function reducer(state, action) {
   switch (action.type) {
@@ -15,6 +14,8 @@ function reducer(state, action) {
       return { ...state, fontSize: state.fontSize + 2 };
     case "smaller":
       return { ...state, fontSize: state.fontSize - 2 };
+    case "toggleHighlight":
+      return { ...state, highlight: !state.highlight };
     case "reset":
       return initialState;
     default:
@@ -25,14 +26,62 @@ function reducer(state, action) {
 function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const highlightStyle = state.highlight
+    ? {
+        color: "red",
+        fontWeight: "bold",
+        border: "2px solid red",
+        padding: "0.5rem",
+      }
+    : {};
+
   return (
     <>
-      <span style={{ fontSize: `${state.fontSize}px`, marginBottom: '1rem' }}>Count: {state.count}</span>
-      <button style={{marginBottom: '1rem'}} onClick={() => dispatch({ type: "decrement" })}>Count -1</button>
-      <button style={{marginBottom: '1rem'}} onClick={() => dispatch({ type: "increment" })}>Count +1</button>
-      <button style={{marginBottom: '1rem'}} onClick={() => dispatch({ type: "larger" })}>FontSize +2</button>
-      <button style={{marginBottom: '1rem'}} onClick={() => dispatch({ type: "smaller" })}>FontSize -2</button>
-      <button style={{marginBottom: '1rem'}} onClick={() => dispatch({ type: "reset" })}>Reset</button>
+      <span
+        style={{
+          fontSize: `${state.fontSize}px`,
+          marginBottom: "1rem",
+          ...highlightStyle,
+        }}
+      >
+        Count: {state.count}
+      </span>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "decrement" })}
+      >
+        Count -1
+      </button>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "increment" })}
+      >
+        Count +1
+      </button>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "larger" })}
+      >
+        FontSize +2
+      </button>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "smaller" })}
+      >
+        FontSize -2
+      </button>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "toggleHighlight" })}
+      >
+        Toggle Highlight
+      </button>
+      <button
+        style={{ marginBottom: "1rem" }}
+        onClick={() => dispatch({ type: "reset" })}
+      >
+        Reset
+      </button>
     </>
   );
 }

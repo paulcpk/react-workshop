@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
+// example using https://react-hook-form.com/get-started
+
 export default function App() {
   const {
     register,

@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -16,8 +17,42 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+        <h2>Hooks</h2>
+        <ul>
+          <li>
+            <Link href="/hooks/use-state">
+              <a>useState()</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/hooks/use-effect">
+              <a>useEffect()</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/hooks/custom-hook">
+              <a>Custom Hook()</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/hooks/use-context">
+              <a>Context API / useContext()</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/hooks/use-reducer">
+              <a>useReducer()</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/hooks/use-form">
+              <a>External hooks / useForm()</a>
+            </Link>
+          </li>
+        </ul>
+
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -58,12 +93,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
