@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 
-const Car = (props) => {
+const Car = ({ color }) => {
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     console.log("Function based car has mounted");
+    console.log("color", color);
   }, []);
 
   return (
-    <div style={{ marginBottom: "1rem" }}>Hi, I am a {props.color} Car! 🚙</div>
+    <div style={{ marginBottom: "1rem" }}>Hi, I am a {color} Car! 🚙</div>
   );
 };
 
