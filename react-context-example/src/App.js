@@ -14,7 +14,6 @@ export const WeatherContext = createContext({
 function App() {
   const [cities, setCities] = useState([])
   const addCity = (name, temperature) => {
-    const newCity = { name, temperature }
     setCities((prevCities) => [...prevCities, { name, temperature }])
   }
   return (

@@ -13,7 +13,7 @@ const TemperatureAverage = (props) => {
   const avg = total / context.cities.length
   return (
     <div>
-      The average is <b>{avg.toFixed(2)}</b> degrees Fahrenheit.
+      The average is <b>{avg.toFixed(2)}</b> degrees Celsius.
     </div>
   )
 }
