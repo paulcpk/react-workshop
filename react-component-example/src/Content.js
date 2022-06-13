@@ -5,8 +5,8 @@ function Content() {
   return (
     <>
       <p>Here some content</p>
-      <FuncCar />
-      <ClassCar />
+      <FuncCar color="red" />
+      <ClassCar color="blue" />
     </>
   );
 }
