@@ -12,12 +12,16 @@ function Posts() {
       })
   }, [])
 
+  const doublePosts = () => {
+    setPosts([...posts, ...posts])
+  }
+
   const renderedPosts = posts.map((post, i) => <p key={i}>{post.data}</p>);
 
   return (
       <>
         {posts.map((post, i) => <p key={i}>{post.data}</p>)}
-        <button onClick={() => console.log('click me')}>Double Posts</button>
+        <button onClick={doublePosts}>Double Posts</button>
       </>
   );
 }
