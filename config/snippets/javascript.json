@@ -1,0 +1,29 @@
+{
+	"Print to console": {
+		"prefix": "lg",
+		"body": [
+			"console.log('$0', $0);"
+		],
+		"description": "Log output to console"
+	},
+	"Functional Component": {
+		"prefix": "fcomp",
+		"body": [
+			"function $0() {",
+			"}",
+			"",
+			"export default $0;"
+		],
+		"description": "Generate a functional component for React"
+	},
+	"Functional Component Arrow Function": {
+		"prefix": "fcompa",
+		"body": [
+			"const $0 = () => {",
+			"}",
+			"",
+			"export default $0;"
+		],
+		"description": "Generate a functional component with an arrow functino for React"
+	}
+}
