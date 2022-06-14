@@ -42,8 +42,9 @@ function App() {
   };
 
   const completeHandler = (index) => {
-    console.log(`item nr. ${index} was clicked`);
-    // set task with index to complete: true
+    const newTasks = [...tasks]
+    newTasks[index].complete = !newTasks[index].complete
+    setTasks(newTasks)
   }
 
   return (
