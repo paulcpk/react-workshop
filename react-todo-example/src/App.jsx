@@ -2,8 +2,14 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import {
+  Box,
+  Checkbox,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import "./App.css";
-import { Box } from "@mui/material";
 
 const DEFAULT_TASKS = [
   {
@@ -58,18 +64,34 @@ function App() {
       <Box
         sx={{
           backgroundColor: "background.paper",
+          marginBottom: "2rem",
         }}
       >
         <List>
           {tasks.map((task, index) => (
             <ListItem
               key={index}
-              sx={{ textDecoration: task.complete ? "line-through" : "none" }}
+              disablePadding
               onClick={() => {
                 completeHandler(index);
               }}
             >
-              {task.task}
+              <ListItemButton dense>
+                <ListItemIcon>
+                  <Checkbox
+                    checked={task.complete}
+                    tabIndex={-1}
+                    disableRipple
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primary={task.task}
+                  sx={{
+                    textDecoration: task.complete ? "line-through" : "none",
+                    opacity: task.complete ? "0.6" : "1",
+                  }}
+                />
+              </ListItemButton>
             </ListItem>
           ))}
         </List>
