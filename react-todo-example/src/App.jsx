@@ -2,10 +2,13 @@ import { useState } from 'react'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+
 import {
   Box,
   Checkbox,
   Grid,
+  IconButton,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -98,6 +101,14 @@ function App() {
               onClick={() => {
                 completeHandler(index)
               }}
+              secondaryAction={
+                <IconButton
+                  aria-label="delete"
+                  onClick={(e) => handleRemove(index)}
+                >
+                  <DeleteForeverIcon />
+                </IconButton>
+              }
             >
               <ListItemButton dense>
                 <ListItemIcon>
