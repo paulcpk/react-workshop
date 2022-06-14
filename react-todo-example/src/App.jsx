@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import { useState } from 'react'
+import Button from '@mui/material/Button'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
 import {
   Box,
   Checkbox,
@@ -12,53 +12,53 @@ import {
   ListSubheader,
   Switch,
   TextField,
-} from "@mui/material";
-import "./App.css";
+} from '@mui/material'
+import './App.css'
 
 const DEFAULT_TASKS = [
   {
-    task: "Finish homework",
+    task: 'Finish homework',
     complete: false,
   },
   {
-    task: "Wash dishes",
+    task: 'Wash dishes',
     complete: false,
   },
   {
-    task: "Clean room",
+    task: 'Clean room',
     complete: true,
   },
   {
-    task: "Make waffles",
+    task: 'Make waffles',
     complete: false,
   },
-];
+]
 
 function App() {
-  const [tasks, setTasks] = useState(DEFAULT_TASKS);
-  const [formState, setFormState] = useState("");
+  const [tasks, setTasks] = useState(DEFAULT_TASKS)
+  const [formState, setFormState] = useState('')
 
   const changeHandler = (event) => {
-    setFormState(event.target.value);
-  };
+    setFormState(event.target.value)
+  }
 
   const submitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const newTask = {
       task: formState,
       complete: false,
-    };
+    }
 
-    setTasks([...tasks, newTask]);
-    setFormState("");
-  };
+    setTasks([...tasks, newTask])
+    setFormState('')
+  }
 
   const completeHandler = (index) => {
-    const newTasks = [...tasks];
-    newTasks[index].complete = !newTasks[index].complete;
-    setTasks(newTasks);
-  };
+    const newTasks = [...tasks]
+    newTasks[index].complete = !newTasks[index].complete
+    setTasks(newTasks)
+  }
 
   return (
     <div className="App">
@@ -67,8 +67,8 @@ function App() {
       </header>
       <Box
         sx={{
-          backgroundColor: "background.paper",
-          marginBottom: "2rem",
+          backgroundColor: 'background.paper',
+          marginBottom: '2rem',
         }}
       >
         <List
@@ -76,10 +76,10 @@ function App() {
             <ListSubheader>
               <Box
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "1rem",
-                  paddingRight: "0",
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '1rem',
+                  paddingRight: '0',
                 }}
               >
                 <Box>My tasks</Box>
@@ -96,7 +96,7 @@ function App() {
               key={index}
               disablePadding
               onClick={() => {
-                completeHandler(index);
+                completeHandler(index)
               }}
             >
               <ListItemButton dense>
@@ -110,8 +110,8 @@ function App() {
                 <ListItemText
                   primary={task.task}
                   sx={{
-                    textDecoration: task.complete ? "line-through" : "none",
-                    opacity: task.complete ? "0.6" : "1",
+                    textDecoration: task.complete ? 'line-through' : 'none',
+                    opacity: task.complete ? '0.6' : '1',
                   }}
                 />
               </ListItemButton>
@@ -120,7 +120,7 @@ function App() {
         </List>
 
         <form onSubmit={submitHandler}>
-          <Grid container alignItems={"center"}>
+          <Grid container alignItems={'center'}>
             <Grid item xs={8} padding={4} pr={2}>
               <TextField
                 fullWidth
@@ -140,7 +140,7 @@ function App() {
         </form>
       </Box>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
