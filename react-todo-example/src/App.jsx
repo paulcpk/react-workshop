@@ -1,22 +1,9 @@
 import { useState } from 'react'
-import Button from '@mui/material/Button'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
-import {
-  Box,
-  Checkbox,
-  Grid,
-  IconButton,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  Switch,
-  TextField,
-} from '@mui/material'
+import { Box, Container } from '@mui/material'
 import './App.css'
+import TodoList from './components/TodoList'
+import TodoForm from './components/TodoForm'
 
 const DEFAULT_TASKS = [
   {
@@ -40,7 +27,7 @@ const DEFAULT_TASKS = [
 function App() {
   const [tasks, setTasks] = useState(DEFAULT_TASKS)
   const [formState, setFormState] = useState('')
-  const [showComplete, setShowComplete] = useState(false)
+
 
   const changeHandler = (event) => {
     setFormState(event.target.value)
@@ -70,102 +57,31 @@ function App() {
     setTasks(newTasks)
   }
 
-  const showCompleteHander = () => {
-    setShowComplete(!showComplete)
-  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h2>Todo App powered by React + Vite + MUI</h2>
-      </header>
-      <Box
-        sx={{
-          backgroundColor: 'background.paper',
-          marginBottom: '2rem',
-        }}
-      >
-        <List
-          subheader={
-            <ListSubheader>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  padding: '1rem',
-                  paddingRight: '0',
-                }}
-              >
-                <Box>My tasks</Box>
-                <Box>
-                  Show complete
-                  <Switch onClick={() => showCompleteHander()} />
-                </Box>
-              </Box>
-            </ListSubheader>
-          }
+      <Container maxWidth="sm">
+        <header className="App-header">
+          <h2>Todo App powered by React + Vite + MUI</h2>
+        </header>
+        <Box
+          sx={{
+            backgroundColor: 'background.paper',
+            marginBottom: '2rem',
+          }}
         >
-          {tasks.map((task, index) => (
-            <ListItem
-              key={index}
-              sx={{
-                display: !showComplete && task.complete ? 'none' : 'inherit',
-              }}
-              disablePadding
-              secondaryAction={
-                <IconButton
-                  aria-label="delete"
-                  onClick={(e) => removeHandler(index)}
-                >
-                  <DeleteForeverIcon />
-                </IconButton>
-              }
-            >
-              <ListItemButton
-                onClick={() => {
-                  completeHandler(index)
-                }}
-                dense
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    checked={task.complete}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  primary={task.task}
-                  sx={{
-                    textDecoration: task.complete ? 'line-through' : 'none',
-                    opacity: task.complete ? '0.6' : '1',
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-
-        <form className="form-input" onSubmit={submitHandler}>
-          <Grid container alignItems={'center'}>
-            <Grid item xs={8} padding={4} pr={2}>
-              <TextField
-                fullWidth
-                variant="standard"
-                label="Enter new Task"
-                id="new-task"
-                value={formState}
-                onChange={changeHandler}
-              />
-            </Grid>
-            <Grid item xs={4} padding={4} pl={2}>
-              <Button fullWidth type="submit" size="large" variant="contained">
-                Add Todo
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
+          <TodoList
+            tasks={tasks}
+            completeHandler={completeHandler}
+            removeHandler={removeHandler}
+          />
+          <TodoForm
+            formState={formState}
+            changeHandler={changeHandler}
+            submitHandler={submitHandler}
+          />
+        </Box>
+      </Container>
     </div>
   )
 }
