@@ -18,6 +18,10 @@
   display: flex;
 }
 
+ul li {
+  cursor: pointer;
+}
+
 /* @media screen and (min-width: 600px) {
   .App {
     background-color: blue;

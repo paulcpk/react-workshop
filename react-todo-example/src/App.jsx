@@ -4,32 +4,18 @@ import "./App.css";
 
 const DEFAULT_TASKS = [
   {
-    id: 1,
     task: "Finish homework",
     complete: false,
   },
   {
-    id: 1,
     task: "Wash dishes",
     complete: false,
   },
   {
-    id: 1,
     task: "Clean room",
-    complete: false,
+    complete: true,
   },
   {
-    id: 1,
-    task: "Make waffles",
-    complete: false,
-  },
-  {
-    id: 1,
-    task: "Make waffles",
-    complete: false,
-  },
-  {
-    id: 1,
     task: "Make waffles",
     complete: false,
   },
@@ -40,19 +26,25 @@ function App() {
   const [formState, setFormState] = useState("");
 
   const changeHandler = (event) => {
-    setFormState(event.target.value)
+    setFormState(event.target.value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
+
     const newTask = {
-      id: 1,
       task: formState,
       complete: false,
-    }
-    setTasks([...tasks, newTask])
-    setFormState('')
+    };
+
+    setTasks([...tasks, newTask]);
+    setFormState("");
   };
+
+  const completeHandler = (index) => {
+    console.log(`item nr. ${index} was clicked`);
+    // set task with index to complete: true
+  }
 
   return (
     <div className="App">
@@ -61,7 +53,15 @@ function App() {
       </header>
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>{task.task}</li>
+          <li
+            style={{ textDecoration: task.complete ? "line-through" : "none" }}
+            onClick={() => {
+              completeHandler(index)
+            }}
+            key={index}
+          >
+            {task.task}
+          </li>
         ))}
       </ul>
       <form onSubmit={submitHandler}>
