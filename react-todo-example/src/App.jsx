@@ -40,6 +40,7 @@ const DEFAULT_TASKS = [
 function App() {
   const [tasks, setTasks] = useState(DEFAULT_TASKS)
   const [formState, setFormState] = useState('')
+  const [showComplete, setShowComplete] = useState(false)
 
   const changeHandler = (event) => {
     setFormState(event.target.value)
@@ -64,7 +65,13 @@ function App() {
   }
 
   const removeHandler = (index) => {
-    // remove item with index "index" from tasks
+    const newTasks = [...tasks]
+    newTasks.splice(index, 1)
+    setTasks(newTasks)
+  }
+
+  const showCompleteHander = () => {
+    setShowComplete(!showComplete)
   }
 
   return (
@@ -92,7 +99,7 @@ function App() {
                 <Box>My tasks</Box>
                 <Box>
                   Show complete
-                  <Switch onClick={() => handleShowComplete()} />
+                  <Switch onClick={() => showCompleteHander()} />
                 </Box>
               </Box>
             </ListSubheader>
@@ -101,20 +108,25 @@ function App() {
           {tasks.map((task, index) => (
             <ListItem
               key={index}
-              disablePadding
-              onClick={() => {
-                completeHandler(index)
+              sx={{
+                display: !showComplete && task.complete ? 'none' : 'inherit',
               }}
+              disablePadding
               secondaryAction={
                 <IconButton
                   aria-label="delete"
-                  onClick={() => removeHandler(index)}
+                  onClick={(e) => removeHandler(index)}
                 >
                   <DeleteForeverIcon />
                 </IconButton>
               }
             >
-              <ListItemButton dense>
+              <ListItemButton
+                onClick={() => {
+                  completeHandler(index)
+                }}
+                dense
+              >
                 <ListItemIcon>
                   <Checkbox
                     checked={task.complete}
@@ -134,7 +146,7 @@ function App() {
           ))}
         </List>
 
-        <form onSubmit={submitHandler}>
+        <form className="form-input" onSubmit={submitHandler}>
           <Grid container alignItems={'center'}>
             <Grid item xs={8} padding={4} pr={2}>
               <TextField
