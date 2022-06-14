@@ -1,9 +1,13 @@
 import { useState } from 'react'
 
-import { Box, Container } from '@mui/material'
+import { Box, Container, Switch } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import './App.css'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
+
+const darkTheme = createTheme({ palette: { mode: 'dark' } })
+const lightTheme = createTheme({ palette: { mode: 'light' } })
 
 const DEFAULT_TASKS = [
   {
@@ -27,7 +31,7 @@ const DEFAULT_TASKS = [
 function App() {
   const [tasks, setTasks] = useState(DEFAULT_TASKS)
   const [formState, setFormState] = useState('')
-
+  const [darkMode, setDarkMode] = useState(false)
 
   const changeHandler = (event) => {
     setFormState(event.target.value)
@@ -57,31 +61,36 @@ function App() {
     setTasks(newTasks)
   }
 
-
   return (
     <div className="App">
-      <Container maxWidth="sm">
-        <header className="App-header">
-          <h2>Todo App powered by React + Vite + MUI</h2>
-        </header>
-        <Box
-          sx={{
-            backgroundColor: 'background.paper',
-            marginBottom: '2rem',
-          }}
-        >
-          <TodoList
-            tasks={tasks}
-            completeHandler={completeHandler}
-            removeHandler={removeHandler}
-          />
-          <TodoForm
-            formState={formState}
-            changeHandler={changeHandler}
-            submitHandler={submitHandler}
-          />
-        </Box>
-      </Container>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <Container maxWidth="sm">
+          <header className="App-header">
+            <h2>Todo App powered by React + Vite + MUI</h2>
+            <Box>
+              Light / Darkmode
+              <Switch onClick={() => setDarkMode(!darkMode)} />
+            </Box>
+          </header>
+          <Box
+            sx={{
+              backgroundColor: 'background.paper',
+              marginBottom: '2rem',
+            }}
+          >
+            <TodoList
+              tasks={tasks}
+              completeHandler={completeHandler}
+              removeHandler={removeHandler}
+            />
+            <TodoForm
+              formState={formState}
+              changeHandler={changeHandler}
+              submitHandler={submitHandler}
+            />
+          </Box>
+        </Container>
+      </ThemeProvider>
     </div>
   )
 }
