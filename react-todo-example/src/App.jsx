@@ -63,6 +63,10 @@ function App() {
     setTasks(newTasks)
   }
 
+  const removeHandler = (index) => {
+    // remove item with index "index" from tasks
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -104,7 +108,7 @@ function App() {
               secondaryAction={
                 <IconButton
                   aria-label="delete"
-                  onClick={(e) => handleRemove(index)}
+                  onClick={() => removeHandler(index)}
                 >
                   <DeleteForeverIcon />
                 </IconButton>
