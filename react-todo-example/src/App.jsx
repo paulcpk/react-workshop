@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import "./App.css";
+import { Box } from "@mui/material";
 
 const DEFAULT_TASKS = [
   {
@@ -54,19 +55,26 @@ function App() {
       <header className="App-header">
         <h2>Todo App powered by React + Vite + MUI</h2>
       </header>
-      <List>
-        {tasks.map((task, index) => (
-          <ListItem
-            key={index}
-            style={{ textDecoration: task.complete ? "line-through" : "none" }}
-            onClick={() => {
-              completeHandler(index);
-            }}
-          >
-            {task.task}
-          </ListItem>
-        ))}
-      </List>
+      <Box
+        sx={{
+          backgroundColor: "background.paper",
+        }}
+      >
+        <List>
+          {tasks.map((task, index) => (
+            <ListItem
+              key={index}
+              sx={{ textDecoration: task.complete ? "line-through" : "none" }}
+              onClick={() => {
+                completeHandler(index);
+              }}
+            >
+              {task.task}
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+
       <form onSubmit={submitHandler}>
         <input type="text" onChange={changeHandler} value={formState} />
         <Button variant="contained">Add task</Button>
