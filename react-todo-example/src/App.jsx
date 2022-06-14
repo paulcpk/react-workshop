@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  TextField,
 } from "@mui/material";
 import "./App.css";
 
@@ -95,12 +96,21 @@ function App() {
             </ListItem>
           ))}
         </List>
-      </Box>
 
-      <form onSubmit={submitHandler}>
-        <input type="text" onChange={changeHandler} value={formState} />
-        <Button variant="contained">Add task</Button>
-      </form>
+        <form onSubmit={submitHandler}>
+          <TextField
+            fullWidth
+            variant="standard"
+            label="Enter new Task"
+            id="new-task"
+            value={formState}
+            onChange={changeHandler}
+          />
+          <Button variant="contained" type="submit">
+            Add task
+          </Button>
+        </form>
+      </Box>
     </div>
   );
 }
