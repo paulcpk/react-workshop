@@ -5,9 +5,12 @@ import ListItem from "@mui/material/ListItem";
 import {
   Box,
   Checkbox,
+  Grid,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
+  Switch,
   TextField,
 } from "@mui/material";
 import "./App.css";
@@ -68,7 +71,26 @@ function App() {
           marginBottom: "2rem",
         }}
       >
-        <List>
+        <List
+          subheader={
+            <ListSubheader>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "1rem",
+                  paddingRight: "0",
+                }}
+              >
+                <Box>My tasks</Box>
+                <Box>
+                  Show complete
+                  <Switch onClick={() => handleShowComplete()} />
+                </Box>
+              </Box>
+            </ListSubheader>
+          }
+        >
           {tasks.map((task, index) => (
             <ListItem
               key={index}
@@ -98,17 +120,23 @@ function App() {
         </List>
 
         <form onSubmit={submitHandler}>
-          <TextField
-            fullWidth
-            variant="standard"
-            label="Enter new Task"
-            id="new-task"
-            value={formState}
-            onChange={changeHandler}
-          />
-          <Button variant="contained" type="submit">
-            Add task
-          </Button>
+          <Grid container alignItems={"center"}>
+            <Grid item xs={8} padding={4} pr={2}>
+              <TextField
+                fullWidth
+                variant="standard"
+                label="Enter new Task"
+                id="new-task"
+                value={formState}
+                onChange={changeHandler}
+              />
+            </Grid>
+            <Grid item xs={4} padding={4} pl={2}>
+              <Button fullWidth type="submit" size="large" variant="contained">
+                Add Todo
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </Box>
     </div>
