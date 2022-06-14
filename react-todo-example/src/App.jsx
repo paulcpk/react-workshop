@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "./logo.svg";
+import Button from '@mui/material/Button';
 import "./App.css";
 
 const DEFAULT_TASKS = [
@@ -51,6 +51,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h2>Todo App powered by React + Vite + MUI</h2>
+        <Button variant="contained">Contained</Button>
       </header>
       <ul>
         {tasks.map((task, index) => (
