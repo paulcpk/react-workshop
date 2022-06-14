@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import "./App.css";
 
 const DEFAULT_TASKS = [
@@ -42,33 +44,32 @@ function App() {
   };
 
   const completeHandler = (index) => {
-    const newTasks = [...tasks]
-    newTasks[index].complete = !newTasks[index].complete
-    setTasks(newTasks)
-  }
+    const newTasks = [...tasks];
+    newTasks[index].complete = !newTasks[index].complete;
+    setTasks(newTasks);
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h2>Todo App powered by React + Vite + MUI</h2>
-        <Button variant="contained">Contained</Button>
       </header>
-      <ul>
+      <List>
         {tasks.map((task, index) => (
-          <li
+          <ListItem
+            key={index}
             style={{ textDecoration: task.complete ? "line-through" : "none" }}
             onClick={() => {
-              completeHandler(index)
+              completeHandler(index);
             }}
-            key={index}
           >
             {task.task}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
       <form onSubmit={submitHandler}>
         <input type="text" onChange={changeHandler} value={formState} />
-        <button>Add task</button>
+        <Button variant="contained">Add task</Button>
       </form>
     </div>
   );
