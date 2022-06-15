@@ -30,6 +30,12 @@ export default function App() {
     }, 500);
   }, []);
 
+  const userProps ={
+    id: 1,
+    age: 14,
+    country: 'de',
+  }
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -37,7 +43,11 @@ export default function App() {
         <button onClick={() => setShowUsers(!showUsers)}>Toggle Users</button>
         {showUsers && (
           <>
-            <User id={1} />
+            {/* this: */}
+            <User id={1} age={23} country={'ch'} />
+            {/* same as:  */}
+            <User {...userProps} />
+
             <User id={2} />
             <User id={3} />
           </>
