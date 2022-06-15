@@ -1,40 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
-
-// Mock implementation for working with real time data
-const ChatAPI = {
-  subscribeToUserStatus(id, callback) {
-    setTimeout(function () {
-      callback({ isOnline: true });
-      console.log(`User with id: ${id} has successfully subscribed`);
-    }, 1000);
-  },
-  unsubscribeFromUserStatus(id, callback) {
-    callback({ isOnline: false });
-    console.log(`User with id: ${id} has successfully unsubscribed`);
-  },
-};
+import useUserStatus from "../../utils/use-user-status";
 
 function User(props) {
-  const [isOnline, setIsOnline] = useState(null);
+  const isOnline = useUserStatus(props.id);
   let output = "";
-
-  useEffect(() => {
-    // callback function for ChatAPI
-    function handleStatusChange(status) {
-      setIsOnline(status.isOnline);
-    }
-    // method to be executed on initialization
-    ChatAPI.subscribeToUserStatus(props.id, handleStatusChange);
-    // console.log('mount')
-
-    // method to be executed on de-initialization
-    return () => {
-        // console.log('unmount')
-      ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange);
-    };
-  }, []);
 
   if (isOnline === null) {
     output = "Loading...";
@@ -51,6 +22,13 @@ function User(props) {
 
 export default function App() {
   const [showUsers, setShowUsers] = useState(true);
+  const [debounced, setDebounced] = useState(false);
+
+  useEffect(() => {
+    setTimeout(function () {
+      setDebounced(true);
+    }, 500);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -62,6 +40,13 @@ export default function App() {
             <User id={1} />
             <User id={2} />
             <User id={3} />
+          </>
+        )}
+        {debounced && (
+          <>
+            <User id={4} />
+            <User id={5} />
+            <User id={6} />
           </>
         )}
       </main>
