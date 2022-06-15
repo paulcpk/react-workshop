@@ -1,21 +1,41 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
+const initialState = { count: 42, fontSize: 16, highlight: false };
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { ...state, count: state.count + 1 };
+    case "decrement":
+      return { ...state, count: state.count - 1 };
+    case "larger":
+      return { ...state, fontSize: state.fontSize + 2 };
+    case "smaller":
+      return { ...state, fontSize: state.fontSize - 2 };
+    case "toggleHighlight":
+      return { ...state, highlight: !state.highlight };
+    case "reset":
+      return initialState;
+    default:
+      throw new Error();
+  }
+}
+
 function Counter({ initialCount }) {
-  const [count, setCount] = useState(initialCount);
-  const [fontSize, setFontSize] = useState(16);
-  const [highlight, setHighlight] = useState(false);
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+  const { highlight, count, fontSize } = state;
 
   const highlightStyle = highlight
-  ? {
-      color: "red",
-      fontWeight: "bold",
-      border: "2px solid red",
-      padding: "0.5rem",
-    }
-  : {};
+    ? {
+        color: "red",
+        fontWeight: "bold",
+        border: "2px solid red",
+        padding: "0.5rem",
+      }
+    : {};
 
   return (
     <div className={hookStyles.counter}>
@@ -23,17 +43,21 @@ function Counter({ initialCount }) {
         style={{
           fontSize: `${fontSize}px`,
           marginBottom: "1rem",
-          ...highlightStyle
+          ...highlightStyle,
         }}
       >
         Count: {count}
       </span>
-      <button onClick={() => setCount(initialCount)}>Reset</button>
-      <button onClick={() => setCount(count - 1)}>Count - 1</button>
-      <button onClick={() => setCount(count + 1)}>Count + 1</button>
-      <button onClick={() => setFontSize(fontSize - 2)}>Fontsize - 2</button>
-      <button onClick={() => setFontSize(fontSize + 2)}>Fontsize + 2</button>
-      <button onClick={() => setHighlight(!highlight)}>Toggle highlight</button>
+      <button onClick={() => dispatch({ type: "toggleHighlight" })}>
+        Toggle highlight
+      </button>
+      <button onClick={() => dispatch({ type: "increment" })}>Count + 1</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>Count - 1</button>
+      <button onClick={() => dispatch({ type: "larger" })}>Fontsize + 2</button>
+      <button onClick={() => dispatch({ type: "smaller" })}>
+        Fontsize - 2
+      </button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
     </div>
   );
 }
