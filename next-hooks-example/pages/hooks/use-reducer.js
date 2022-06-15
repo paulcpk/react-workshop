@@ -3,7 +3,16 @@ import { useState, useEffect, useReducer } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
-const initialState = { count: 42, fontSize: 16, highlight: false };
+const initialState = {
+  count: 42,
+  fontSize: 16,
+  highlight: false,
+  user: {
+    age: 24,
+    name: "John Doe",
+    id: 1
+  },
+};
 
 function counterReducer(state, action) {
   switch (action.type) {
@@ -19,8 +28,10 @@ function counterReducer(state, action) {
       return { ...state, highlight: !state.highlight };
     case "edgeCase":
       return { ...state, count: 10000, fontSize: 40, highlight: true };
+    case "ageQuick":
+      return { ...state, user: { ...state.user, age: 100 } };
     case "reset":
-      return {...initialState, count: action.payload};
+      return { ...initialState, count: action.payload };
     default:
       throw new Error();
   }
@@ -28,7 +39,7 @@ function counterReducer(state, action) {
 
 function Counter({ initialCount }) {
   const [state, dispatch] = useReducer(counterReducer, initialState);
-  const { highlight, count, fontSize } = state;
+  const { user, highlight, count, fontSize } = state;
 
   const highlightStyle = highlight
     ? {
@@ -41,6 +52,7 @@ function Counter({ initialCount }) {
 
   return (
     <div className={hookStyles.counter}>
+        <h2>{user.name}: {user.age} </h2>
       <span
         style={{
           fontSize: `${fontSize}px`,
@@ -60,7 +72,12 @@ function Counter({ initialCount }) {
         Fontsize - 2
       </button>
       <button onClick={() => dispatch({ type: "edgeCase" })}>Edge Case</button>
-      <button onClick={() => dispatch({ type: "reset", payload: initialCount })}>Reset</button>
+      <button onClick={() => dispatch({ type: "ageQuick" })}>ageQuick</button>
+      <button
+        onClick={() => dispatch({ type: "reset", payload: initialCount })}
+      >
+        Reset
+      </button>
     </div>
   );
 }
