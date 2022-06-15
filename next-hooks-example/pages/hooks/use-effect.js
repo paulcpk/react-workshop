@@ -50,15 +50,19 @@ function TodoList() {
   );
 }
 
-function User() {
+function User(props) {
   const [isOnline, setIsOnline] = useState(null);
   let output = "";
 
   useEffect(() => {
+    // callback function for ChatAPI
     function handleStatusChange(status) {
       setIsOnline(status.isOnline);
     }
+    // method to be executed on initialization
     ChatAPI.subscribeToUserStatus(props.id, handleStatusChange);
+
+    // method to be executed on de-initialization
     return () => {
       ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange);
     };
@@ -94,6 +98,9 @@ export default function App() {
       <main className={styles.main}>
         <h1>useEffect()</h1>
         <TodoList />
+        <User id={1} />
+        <User id={2} />
+        <User id={3} />
       </main>
     </div>
   );
