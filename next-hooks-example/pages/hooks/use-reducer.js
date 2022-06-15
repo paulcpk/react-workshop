@@ -17,8 +17,10 @@ function counterReducer(state, action) {
       return { ...state, fontSize: state.fontSize - 2 };
     case "toggleHighlight":
       return { ...state, highlight: !state.highlight };
+    case "edgeCase":
+      return { ...state, count: 10000, fontSize: 40, highlight: true };
     case "reset":
-      return initialState;
+      return {...initialState, count: action.payload};
     default:
       throw new Error();
   }
@@ -57,7 +59,8 @@ function Counter({ initialCount }) {
       <button onClick={() => dispatch({ type: "smaller" })}>
         Fontsize - 2
       </button>
-      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+      <button onClick={() => dispatch({ type: "edgeCase" })}>Edge Case</button>
+      <button onClick={() => dispatch({ type: "reset", payload: initialCount })}>Reset</button>
     </div>
   );
 }
@@ -72,7 +75,7 @@ export default function App() {
       </Head>
       <main className={styles.main}>
         <h1>useReducer()</h1>
-        <Counter initialCount={42} />
+        <Counter initialCount={60} />
       </main>
     </div>
   );
