@@ -82,11 +82,12 @@ function User(props) {
 }
 
 export default function App() {
+  const [showUsers, setShowUsers] = useState(true);
   // use with caution -> might lead to rendering delays
-  useLayoutEffect(() => {
-    console.log("execute useLayoutEffect()");
-    document.title = `Hello, World`;
-  });
+  //   useLayoutEffect(() => {
+  //     console.log("execute useLayoutEffect()");
+  //     document.title = `Hello, World`;
+  //   });
 
   useEffect(() => {
     console.log("execute useEffect()");
@@ -98,9 +99,14 @@ export default function App() {
       <main className={styles.main}>
         <h1>useEffect()</h1>
         <TodoList />
-        <User id={1} />
-        <User id={2} />
-        <User id={3} />
+        <button onClick={() => setShowUsers(!showUsers)}>Toggle Users</button>
+        {showUsers && (
+          <>
+            <User id={1} />
+            <User id={2} />
+            <User id={3} />
+          </>
+        )}
       </main>
     </div>
   );
