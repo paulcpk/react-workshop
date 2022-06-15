@@ -6,6 +6,16 @@ import hookStyles from "../../styles/Hooks.module.css";
 function Counter({ initialCount }) {
   const [count, setCount] = useState(initialCount);
   const [fontSize, setFontSize] = useState(16);
+  const [highlight, setHighlight] = useState(false);
+
+  const highlightStyle = highlight
+  ? {
+      color: "red",
+      fontWeight: "bold",
+      border: "2px solid red",
+      padding: "0.5rem",
+    }
+  : {};
 
   return (
     <div className={hookStyles.counter}>
@@ -13,6 +23,7 @@ function Counter({ initialCount }) {
         style={{
           fontSize: `${fontSize}px`,
           marginBottom: "1rem",
+          ...highlightStyle
         }}
       >
         Count: {count}
@@ -22,6 +33,7 @@ function Counter({ initialCount }) {
       <button onClick={() => setCount(count + 1)}>Count + 1</button>
       <button onClick={() => setFontSize(fontSize - 2)}>Fontsize - 2</button>
       <button onClick={() => setFontSize(fontSize + 2)}>Fontsize + 2</button>
+      <button onClick={() => setHighlight(!highlight)}>Toggle highlight</button>
     </div>
   );
 }
