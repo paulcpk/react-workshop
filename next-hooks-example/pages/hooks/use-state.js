@@ -22,8 +22,12 @@ function someExpensiveComputation(count) {
 }
 
 function ExpensiveCounter({ initialCount }) {
+  // runs every time:
+//   const [count, setCount] = useState(someExpensiveComputation(initialCount));
+
   // lazy initialization
   // initialCount will default to return value of someExpensiveComputation on initialization
+  // runs ONLY on initialization
   const [count, setCount] = useState(() => {
     const initialState = someExpensiveComputation(initialCount);
     return initialState;
