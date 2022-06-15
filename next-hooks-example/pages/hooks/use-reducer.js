@@ -5,13 +5,23 @@ import hookStyles from "../../styles/Hooks.module.css";
 
 function Counter({ initialCount }) {
   const [count, setCount] = useState(initialCount);
+  const [fontSize, setFontSize] = useState(16);
+
   return (
     <div className={hookStyles.counter}>
-      <h2>Counter</h2>
-      Count: {count}
+      <span
+        style={{
+          fontSize: `${fontSize}px`,
+          marginBottom: "1rem",
+        }}
+      >
+        Count: {count}
+      </span>
       <button onClick={() => setCount(initialCount)}>Reset</button>
-      <button onClick={() => setCount((prevCount) => prevCount - 1)}>-</button>
-      <button onClick={() => setCount((prevCount) => prevCount + 1)}>+</button>
+      <button onClick={() => setCount(count - 1)}>Count - 1</button>
+      <button onClick={() => setCount(count + 1)}>Count + 1</button>
+      <button onClick={() => setFontSize(fontSize - 2)}>Fontsize - 2</button>
+      <button onClick={() => setFontSize(fontSize + 2)}>Fontsize + 2</button>
     </div>
   );
 }
