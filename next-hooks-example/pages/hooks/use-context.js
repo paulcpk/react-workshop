@@ -16,18 +16,23 @@ const themes = {
 // Can we write a toggle for this?
 const ThemeContext = createContext(themes);
 
-function ThemedButton() {
-  const theme = useContext(ThemeContext);
+function ThemedButton({ clickHandler }) {
+  //   const theme = useContext(ThemeContext);
   return (
-    <button
-      style={{
-        background: theme.background,
-        color: theme.foreground,
-        marginBottom: "1rem",
-      }}
-    >
-      I am styled by theme context!
-    </button>
+    <ThemeContext.Consumer>
+      {(theme) => (
+        <button
+          style={{
+            background: theme.background,
+            color: theme.foreground,
+            marginBottom: "1rem",
+          }}
+          onClick={() => clickHandler()}
+        >
+          I am styled by theme context!
+        </button>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 
@@ -55,15 +60,17 @@ function ThemedNav() {
 function Toolbar(props) {
   const [lightMode, setLightMode] = useState(true);
 
+  const clickHandler = () => setLightMode(!lightMode);
+
   return (
     <ThemeContext.Provider value={lightMode ? themes.light : themes.dark}>
       <button
         style={{ marginBottom: "1rem" }}
-        onClick={() => setLightMode(!lightMode)}
+        onClick={clickHandler}
       >
         Toggle Theme
       </button>
-      <ThemedButton />
+      <ThemedButton clickHandler={clickHandler} />
       <ThemedNav />
     </ThemeContext.Provider>
   );
