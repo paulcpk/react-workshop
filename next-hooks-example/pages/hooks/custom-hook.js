@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
