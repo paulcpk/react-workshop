@@ -17,39 +17,6 @@ const ChatAPI = {
   },
 };
 
-function TodoList() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/todos`)
-      .then((result) => {
-        setData(result.data.slice(0, 10));
-      })
-      .catch(console.error);
-  }, []);
-
-  if (!data) {
-    return null;
-  }
-
-  return (
-    <ul>
-      {data.map((todo) => (
-        <li key={todo.id}>
-          <span
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
-          >
-            {todo.title}
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function User(props) {
   const [isOnline, setIsOnline] = useState(null);
   let output = "";
@@ -85,22 +52,11 @@ function User(props) {
 
 export default function App() {
   const [showUsers, setShowUsers] = useState(true);
-  // use with caution -> might lead to rendering delays
-  //   useLayoutEffect(() => {
-  //     console.log("execute useLayoutEffect()");
-  //     document.title = `Hello, World`;
-  //   });
-
-  useEffect(() => {
-    console.log("execute useEffect()");
-    document.title = `Bonjour, World`;
-  });
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h1>useEffect()</h1>
-        <TodoList />
         <button onClick={() => setShowUsers(!showUsers)}>Toggle Users</button>
         {showUsers && (
           <>
