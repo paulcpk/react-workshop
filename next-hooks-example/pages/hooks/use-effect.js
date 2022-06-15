@@ -50,6 +50,33 @@ function TodoList() {
   );
 }
 
+function User() {
+  const [isOnline, setIsOnline] = useState(null);
+  let output = "";
+
+  useEffect(() => {
+    function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+    ChatAPI.subscribeToUserStatus(props.id, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange);
+    };
+  }, []);
+
+  if (isOnline === null) {
+    output = "Loading...";
+  } else {
+    output = isOnline ? "Online" : "Offline";
+  }
+
+  return (
+    <div className={hookStyles.user}>
+      🐵 User {props.id}: {output}
+    </div>
+  );
+}
+
 export default function App() {
   // use with caution -> might lead to rendering delays
   useLayoutEffect(() => {
