@@ -1,34 +1,33 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
+import express from "express";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
-const crypto = require("crypto");
+import crypto from "crypto";
 const app = express();
 const authTokens = {};
 
+import { USER_DATA, ORDER_DATA } from "./mockDb.js";
+
 // inspired by: https://github.com/jkasun/stack-abuse-express-authentication
-
-// mock DB
-const users = [
-  // This user is added to the array to avoid creating new user on each restart
-  {
-    firstName: "John",
-    lastName: "Doe",
-    email: "johndoe@gmail.com",
-    password: "Test123",
-  },
-];
-
-const getHashedPassword = (password) => {
-//   const sha256 = crypto.createHash("sha256");
-//   const hash = sha256.update(password).digest("base64");
-//   return hash;
-    // Mock implementation
-    return password
-};
 
 const generateAuthToken = () => {
   return crypto.randomBytes(30).toString("hex");
+};
+
+const getUserByCredentials = ({ email, password }) => {
+  return USER_DATA.find((user) => {
+    if (!password) {
+      // only look for email if no password is passed
+      return user.email === email;
+    }
+    return user.email === email && password === user.password;
+  });
+};
+
+const getOrderListByIds = (orderIds) => {
+  return orderIds.map((id) => {
+    return ORDER_DATA.find((order) => id === order.id);
+  });
 };
 
 // to support URL-encoded bodies
@@ -42,13 +41,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Login endpoint
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const hashedPassword = getHashedPassword(password);
+  console.log("req.body", req.body);
 
-  const user = users.find((u) => {
-    return u.email === email && hashedPassword === u.password;
-  });
+  // IMPORTANT: Passwords should be encrypted for DB requests
+  // Mock/Example implementation only
+  const user = getUserByCredentials({ email, password });
+  console.log("user", user);
 
   if (user) {
     const authToken = generateAuthToken();
@@ -63,16 +64,34 @@ app.post("/login", (req, res) => {
   }
 });
 
-// protected route
-app.get("/profile", (req, res) => {
+// Logout endpoint
+app.get("/logout", (req, res) => {
   if (req.user) {
-    res.json({
-      user: {
-        firstName: "John",
-        lastName: "Doe",
-        email: "johndoe@gmail.com",
-      },
-    });
+    res.clearCookie("AuthToken");
+    res.status(200).send("User logged out.");
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+});
+
+// protected routes
+app.get("/profile", (req, res) => {
+  console.log("req.user", req.user);
+  if (req.user) {
+    const user = getUserByCredentials({ email: req.user });
+    console.log("user", user);
+    res.json({ data: user });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+});
+
+app.get("/orders", (req, res) => {
+  console.log("req.user", req.user);
+  if (req.user) {
+    const user = getUserByCredentials({ email: req.user });
+    const orders = getOrderListByIds(user.orders);
+    res.json({ data: [...orders] });
   } else {
     res.status(401).send("Unauthorized");
   }
