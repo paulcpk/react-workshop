@@ -67,13 +67,8 @@ const App = () => {
 
   const handleComplete = (index) => {
     const newTasks = [...tasks]
-    if (newTasks[index].complete === false) {
-      newTasks[index].complete = true
-    } else {
-      newTasks[index].complete = false
-    }
+    newTasks[index].complete = !newTasks[index].complete
     setTasks(newTasks)
-    console.log(newTasks)
   }
 
   const handleRemove = (index) => {
