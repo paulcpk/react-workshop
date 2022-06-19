@@ -1,15 +1,26 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 
-const AuthContext = createContext({});
+const COOKIE_NAMESPACE = 'AuthToken'
+
+const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState({})
 
-    return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
-            {children}
-        </AuthContext.Provider>
-    )
+  useEffect(() => {
+    console.log('init')
+    console.log('Cookies.get', Cookies.get(COOKIE_NAMESPACE))
+    setAuth({
+      isAuth: !!Cookies.get(COOKIE_NAMESPACE),
+    })
+  }, [])
+
+  return (
+    <AuthContext.Provider value={{ auth, setAuth }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export default AuthContext;
+export default AuthContext
