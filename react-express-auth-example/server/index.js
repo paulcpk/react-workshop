@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import crypto from "crypto";
 const app = express();
@@ -10,6 +11,7 @@ import { USER_DATA, ORDER_DATA } from "./mockDb.js";
 
 // inspired by: https://github.com/jkasun/stack-abuse-express-authentication
 
+// helper functions
 const generateAuthToken = () => {
   return crypto.randomBytes(30).toString("hex");
 };
@@ -30,19 +32,21 @@ const getOrderListByIds = (orderIds) => {
   });
 };
 
+// Add middlewares
 // to support URL-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(cookieParser());
-
 app.use((req, res, next) => {
   const authToken = req.cookies["AuthToken"];
   req.user = authTokens[authToken];
   next();
 });
+// Enable all CORS
+// DO NOT DO THIS IN PRODUCTION
+// app.use(cors({ origin: "*" }));
 
 // Login endpoint
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
   console.log("req.body", req.body);
 
@@ -65,7 +69,7 @@ app.post("/login", (req, res) => {
 });
 
 // Logout endpoint
-app.get("/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
   if (req.user) {
     res.clearCookie("AuthToken");
     res.status(200).send("User logged out.");
@@ -75,7 +79,7 @@ app.get("/logout", (req, res) => {
 });
 
 // protected routes
-app.get("/profile", (req, res) => {
+app.get("/api/profile", (req, res) => {
   console.log("req.user", req.user);
   if (req.user) {
     const user = getUserByCredentials({ email: req.user });
@@ -86,7 +90,7 @@ app.get("/profile", (req, res) => {
   }
 });
 
-app.get("/orders", (req, res) => {
+app.get("/api/orders", (req, res) => {
   console.log("req.user", req.user);
   if (req.user) {
     const user = getUserByCredentials({ email: req.user });
@@ -97,4 +101,4 @@ app.get("/orders", (req, res) => {
   }
 });
 
-app.listen(3000);
+app.listen(5555);

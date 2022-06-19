@@ -1,7 +1,6 @@
 
 // mock DB
 export const USER_DATA = [
-    // This user is added to the array to avoid creating new user on each restart
     {
       id: 1,
       firstName: "John",
@@ -18,12 +17,11 @@ export const USER_DATA = [
       email: "janesmith@gmail.com",
       password: "Foobar123",
       dateOfBirth: "15-10-1985",
-      orders: [2, 3, 4],
+      orders: [2, 3, 3, 4, 3],
     },
   ];
   
   export const ORDER_DATA = [
-    // This user is added to the array to avoid creating new user on each restart
     {
       id: 1,
       name: "iPhone 11 64GB",
