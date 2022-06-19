@@ -8,6 +8,7 @@ import Orders from './components/Orders'
 import Profile from './components/Profile'
 import AuthContext from './context/AuthProvider'
 import './App.css'
+import Home from './components/Home'
 
 function App() {
   const {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* public routes */}
+          <Route exact path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="unauthorized" element={<Unauthorized />} />
 

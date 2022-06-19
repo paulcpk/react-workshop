@@ -9,8 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({})
 
   useEffect(() => {
-    console.log('init')
-    console.log('Cookies.get', Cookies.get(COOKIE_NAMESPACE))
     setAuth({
       isAuth: !!Cookies.get(COOKIE_NAMESPACE),
     })

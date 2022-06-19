@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
 import AuthContext from '../context/AuthProvider'
 import axios from '../api/axios'
+import { Link } from 'react-router-dom'
 
 const LOGIN_URL = '/login'
 
@@ -30,11 +31,7 @@ const Login = () => {
         }
       )
 
-      console.log(JSON.stringify(response?.data))
-      console.log(JSON.stringify(response))
-
-      //   const accessToken = response?.data?.accessToken;
-
+      console.log('response', response)
       setAuth({ isAuth: true, email })
       setEmail('')
       setPassword('')
@@ -52,39 +49,15 @@ const Login = () => {
     }
   }
 
-  const clickHandler = async (e, route) => {
-    e.preventDefault()
-
-    try {
-      const response = await axios.get(route, {
-        withCredentials: true,
-      })
-
-      console.log(JSON.stringify(response?.data))
-      console.log(JSON.stringify(response))
-    } catch (err) {
-      console.log('err', err)
-    }
-  }
-
   return (
     <>
-      <div className="card">
+      <div className="card" style={{ marginTop: '2rem' }}>
         <div className="card-body">
-          <button onClick={(e) => clickHandler(e, '/profile')}>
-            Call Profile
-          </button>
-          <button onClick={(e) => clickHandler(e, '/orders')}>
-            Call Orders
-          </button>
-          <button onClick={(e) => clickHandler(e, '/logout')}>
-            Call Logout
-          </button>
           {success ? (
             <>
               <h5 className="card-title">Success! Your are logged in!</h5>
               <p>
-                <a href="/">Go to Home</a>
+                <Link to="/">Go to Home</Link>
               </p>
             </>
           ) : (
