@@ -46,7 +46,7 @@ function App() {
           <div className="products-panel">
             <h2 className="title has-text-weight-bold">Select a Coffee</h2>
             {PRODUCT_DEFINITIONS.map((product) => (
-              <Product {...product} />
+              <Product key={product.id} {...product} />
             ))}
           </div>
           <div className="checkout-panel box">

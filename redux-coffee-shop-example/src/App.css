@@ -13,7 +13,9 @@ body {
   padding: 0;
 }
 
-h1,h2,h3 {
+h1,
+h2,
+h3 {
   margin-top: 0;
 }
 
@@ -62,12 +64,12 @@ h1,h2,h3 {
 
 .products-panel,
 .checkout-panel {
- 
 }
 
 .products-panel {
-  display: grid;
+  display: flex;
   flex-grow: 3;
+  flex-direction: column;
 }
 
 .checkout-panel {
@@ -77,8 +79,23 @@ h1,h2,h3 {
 }
 
 /* Product Styles */
-
 .product {
   margin: 0.5rem;
   padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.checkbox input {
+  margin-right: 0.5rem;
+}
+
+.product-option {
+  margin-top: 0.5rem;
 }
