@@ -2,7 +2,8 @@ import React from "react";
 import { Counter } from "./features/counter/Counter";
 import "bulma/css/bulma.css";
 import "./App.css";
-import Product from "./Product";
+import Product from "./components/Product";
+import Checkout from "./features/checkout/Checkout";
 
 const PRODUCT_DEFINITIONS = [
   {
@@ -32,6 +33,8 @@ const PRODUCT_DEFINITIONS = [
   },
 ];
 
+const addProductOptions = (products) => products.map(product => ({...product, addSugar: false, addShot: false}))
+
 function App() {
   return (
     <div className="app">
@@ -45,20 +48,17 @@ function App() {
         <div className="app-content">
           <div className="products-panel">
             <h2 className="title has-text-weight-bold">Select a Coffee</h2>
-            {PRODUCT_DEFINITIONS.map((product) => (
+            {addProductOptions(PRODUCT_DEFINITIONS).map((product) => (
               <Product key={product.id} {...product} />
             ))}
           </div>
           <div className="checkout-panel box">
-            <h3 className="subtitle has-text-weight-bold">Your Order Summary</h3>
-            <button className="button is-fullwidth">
-              Submit Order
-            </button>
+            <Checkout />
           </div>
         </div>
       </main>
 
-      {/* <footer className="App-footer">
+      {/* <footer className="app-footer">
         <Counter />
       </footer> */}
     </div>
