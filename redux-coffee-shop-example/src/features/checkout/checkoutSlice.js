@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { postOrder } from './checkoutAPI'
 
+// initial Redux state
 const initialState = {
   products: [],
   status: 'idle',
 }
 
+// async Redux action (Thunk)
 export const checkoutPostOrder = createAsyncThunk(
   'checkout/postOrder',
   async (products) => {
@@ -14,12 +16,12 @@ export const checkoutPostOrder = createAsyncThunk(
   }
 )
 
+// utility function provided by RTK to save on boilerplate
 export const checkoutSlice = createSlice({
   name: 'checkout',
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      console.log('action', action)
       state.products.push(action.payload)
     },
     removeProduct: (state, action) => {
@@ -27,7 +29,7 @@ export const checkoutSlice = createSlice({
         (products, index) => index !== action.payload
       )
     },
-    reset: (state, action) => {
+    reset: (state) => {
       state = initialState
     },
     log: (state, action) => {
@@ -35,12 +37,13 @@ export const checkoutSlice = createSlice({
       console.log('state', state)
     },
   },
+  // extraReducers for handling side effects and async action
   extraReducers: (builder) => {
     builder
-      .addCase(checkoutPostOrder.pending, (state, action) => {
+      .addCase(checkoutPostOrder.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(checkoutPostOrder.fulfilled, (state, action) => {
+      .addCase(checkoutPostOrder.fulfilled, (state) => {
         state.status = 'idle'
         state.products = []
       })

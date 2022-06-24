@@ -29,7 +29,7 @@ const CheckoutItem = (props) => {
           onClick={() => dispatch(removeProduct(index))}
         ></button>
       </span>
-      {(addSugar || addSugar) && (
+      {(addSugar || addShot) && (
         <ul className="is-size-7">
           {addSugar && <li>{COFFEE_OPTION_STRINGS.addSugar}</li>}
           {addShot && <li>{COFFEE_OPTION_STRINGS.addShot}</li>}
