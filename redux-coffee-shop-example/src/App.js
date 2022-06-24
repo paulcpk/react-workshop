@@ -1,39 +1,40 @@
-import React from "react";
-import { Counter } from "./features/counter/Counter";
-import "bulma/css/bulma.css";
-import "./App.css";
-import Product from "./components/Product";
-import Checkout from "./features/checkout/Checkout";
+import React from 'react'
+import { Counter } from './features/counter/Counter'
+import 'bulma/css/bulma.css'
+import './App.css'
+import Product from './components/Product'
+import Checkout from './features/checkout/Checkout'
 
 const PRODUCT_DEFINITIONS = [
   {
     id: 1,
-    name: "Cappucccino",
+    name: 'Cappucccino',
     price: 3.5,
   },
   {
     id: 2,
-    name: "Flat White",
+    name: 'Flat White',
     price: 4,
   },
   {
     id: 3,
-    name: "Americano",
+    name: 'Americano',
     price: 2.5,
   },
   {
     id: 4,
-    name: "Espresso",
+    name: 'Espresso',
     price: 1.5,
   },
   {
     id: 5,
-    name: "Filter Coffee",
+    name: 'Filter Coffee',
     price: 2.5,
   },
-];
+]
 
-const addProductOptions = (products) => products.map(product => ({...product, addSugar: false, addShot: false}))
+const addProductOptions = (products) =>
+  products.map((product) => ({ ...product, addSugar: false, addShot: false }))
 
 function App() {
   return (
@@ -53,16 +54,19 @@ function App() {
             ))}
           </div>
           <div className="checkout-panel box">
+            <h3 className="subtitle has-text-weight-bold">
+              Your Order Summary
+            </h3>
             <Checkout />
           </div>
         </div>
       </main>
 
-      {/* <footer className="app-footer">
+      <footer className="app-footer">
         <Counter />
-      </footer> */}
+      </footer>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

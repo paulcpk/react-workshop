@@ -1,18 +1,14 @@
-import React, { useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   addProduct, // global state setter
-  log,
-  selectProducts, // global state getter
-} from "../features/checkout/checkoutSlice";
-import { getCoffeePrice, getFormattedPrice } from "../utils/getCoffeePrice";
+} from '../features/checkout/checkoutSlice'
+import { getCoffeePrice, getFormattedPrice } from '../utils/getCoffeePrice'
 
 function Product(props) {
-  console.log("props", props);
-  const productList = useSelector(selectProducts);
-  const dispatch = useDispatch();
-  const [coffeeState, setProductState] = useState(props);
-  const { id, name, addSugar, addShot } = coffeeState;
+  const dispatch = useDispatch()
+  const [coffeeState, setProductState] = useState(props)
+  const { id, name, addSugar, addShot } = coffeeState
 
   const addToCartHandler = () => {
     dispatch(addProduct(coffeeState))
@@ -30,7 +26,12 @@ function Product(props) {
           <input
             id={`add-sugar-${id}`}
             type="checkbox"
-            onChange={(e) => setProductState(prev => ({...prev, addSugar: e.target.checked}))}
+            onChange={(e) =>
+              setProductState((prev) => ({
+                ...prev,
+                addSugar: e.target.checked,
+              }))
+            }
             checked={addSugar}
           />
           Extra Sugar + $0.50
@@ -42,20 +43,22 @@ function Product(props) {
           <input
             id={`add-espresso-${id}`}
             type="checkbox"
-            onChange={(e) => setProductState(prev => ({...prev, addShot: e.target.checked}))}
+            onChange={(e) =>
+              setProductState((prev) => ({
+                ...prev,
+                addShot: e.target.checked,
+              }))
+            }
             checked={addShot}
           />
           Extra Espresso Shot + $1.00
         </label>
       </div>
-      <button
-        className="button is-small"
-        onClick={addToCartHandler}
-      >
+      <button className="button is-small" onClick={addToCartHandler}>
         Add to Cart
       </button>
     </div>
-  );
+  )
 }
 
-export default Product;
+export default Product
