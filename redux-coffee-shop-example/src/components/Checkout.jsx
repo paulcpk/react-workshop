@@ -14,6 +14,10 @@ function Checkout() {
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
 
+  const submitHandler = () => {
+    console.log('submit');
+  }
+
   if (!products.length) {
     return <p>Nothing to display.</p>;
   }
@@ -34,10 +38,12 @@ function Checkout() {
           </li>
         ))}
       </ul>
-      <hr />
       <span className="checkout-total-price is-size-4">
         Total: {getFormattedPrice(getTotal(products))}
       </span>
+      <button className="button is-fullwidth" onClick={submitHandler}>
+        Submit Order
+      </button>
     </>
   );
 }
