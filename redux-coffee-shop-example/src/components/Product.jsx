@@ -6,7 +6,7 @@ import { getCoffeePrice, getFormattedPrice } from "../utils/getCoffeePrice";
 export default function Product(props) {
   const dispatch = useDispatch();
   const [coffeeState, setCoffeeState] = useState(props);
-  const { id, name, price, addSugar, addShot } = props;
+  const { id, name } = props;
 
   const addToCartHandler = () => {
     dispatch(addProduct(coffeeState))

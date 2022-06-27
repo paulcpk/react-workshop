@@ -3,6 +3,7 @@ import { Counter } from './features/counter/Counter'
 import 'bulma/css/bulma.css'
 import './App.css'
 import Product from './components/Product'
+import Checkout from './components/Checkout'
 
 
 const PRODUCT_DEFINITIONS = [
@@ -54,14 +55,15 @@ function App() {
             <h3 className="subtitle has-text-weight-bold">
               Your Order Summary
             </h3>
-
+            <Checkout />
           </div>
         </div>
       </main>
 
-      {/* <footer className="app-footer">
+      <footer className="app-footer">
         <Counter />
-      </footer> */}
+        <Counter />
+      </footer>
     </div>
   )
 }
