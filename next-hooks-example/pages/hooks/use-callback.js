@@ -24,9 +24,14 @@ const TodoList = () => {
   const increment = () => {
     setCount((c) => c + 1);
   };
+
+  // this function is recreated on every render of TodoList
+  // renders are triggered by the state manipulation -> setTodos
   const addTodo = () => {
     setTodos((t) => [...t, "New Todo"]);
   };
+
+  // Now this function is only reinitialized when 'todos' changes
   //   const addTodo = useCallback(() => {
   //     setTodos((t) => [...t, "New Todo"]);
   //   }, [todos]);
