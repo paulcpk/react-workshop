@@ -4,6 +4,7 @@ import 'bulma/css/bulma.css'
 import './App.css'
 import Product from './components/Product'
 
+
 const PRODUCT_DEFINITIONS = [
   {
     id: 1,
@@ -30,8 +31,7 @@ const PRODUCT_DEFINITIONS = [
     name: 'Filter Coffee',
     price: 2.5,
   },
-]
-
+].map((product) => ({ ...product, addSugar: false, addShot: false }))
 
 function App() {
   return (
