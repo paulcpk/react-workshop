@@ -42,7 +42,7 @@ export default function Product(props) {
               // }))
               setProductState((prev) => ({
                 ...prev,
-                addSugar: e.target.checked,
+                addShot: e.target.checked,
               }))
             } />
           Extra Espresso Shot + $1.00
