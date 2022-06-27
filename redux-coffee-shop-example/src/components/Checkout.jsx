@@ -5,9 +5,18 @@ import {
 } from "../features/product/productSlice";
 import { getCoffeePrice, getFormattedPrice } from "../utils/getCoffeePrice";
 
+const getTotal = (productList) =>
+  productList
+    .map((product) => getCoffeePrice(product))
+    .reduce((prev, current) => prev + current, 0)
+
 function Checkout() {
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
+
+  if (!products.length) {
+    return <p>Nothing to display.</p>;
+  }
 
   return (
     <>
@@ -26,7 +35,9 @@ function Checkout() {
         ))}
       </ul>
       <hr />
-      <h4>TOTAL: ??</h4>
+      <span className="checkout-total-price is-size-4">
+        Total: {getFormattedPrice(getTotal(products))}
+      </span>
     </>
   );
 }
