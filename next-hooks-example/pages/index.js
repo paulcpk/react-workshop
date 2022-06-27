@@ -49,6 +49,11 @@ export default function Home() {
               <a>External hooks / useForm()</a>
             </Link>
           </li>
+          <li>
+            <Link href="/hooks/use-memo">
+              <a>useMemo()</a>
+            </Link>
+          </li>
         </ul>
 
         <p className={styles.description}>
