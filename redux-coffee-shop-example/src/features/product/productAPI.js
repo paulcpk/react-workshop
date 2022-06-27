@@ -2,6 +2,6 @@
 export function postOrder(products) {
   console.log("POST products:", products);
   return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: "success" }), 500)
+    setTimeout(() => resolve({ data: "success" }), 1500)
   );
 }

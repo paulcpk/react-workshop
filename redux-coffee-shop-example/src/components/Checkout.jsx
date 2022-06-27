@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectProducts,
+  selectStatus,
   removeProduct,
+  checkoutPostOrder,
 } from "../features/product/productSlice";
 import { getCoffeePrice, getFormattedPrice } from "../utils/getCoffeePrice";
 
@@ -12,10 +14,16 @@ const getTotal = (productList) =>
 
 function Checkout() {
   const products = useSelector(selectProducts);
+  const status = useSelector(selectStatus)
   const dispatch = useDispatch();
 
   const submitHandler = () => {
     console.log('submit');
+    dispatch(checkoutPostOrder(products))
+  }
+  
+  if (status === 'loading') {
+    return <p>Loading...</p>
   }
 
   if (!products.length) {
