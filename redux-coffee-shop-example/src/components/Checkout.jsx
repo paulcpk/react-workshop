@@ -1,9 +1,16 @@
-
+import { useSelector } from "react-redux";
+import { selectProducts } from "../features/product/productSlice";
 
 function Checkout() {
-    return (
-        <span>Hello from checkout</span>
-    )
+  const products = useSelector(selectProducts);
+
+  return (
+    <ul>
+      {products.map((product) => (
+        <li>{product.name}</li>
+      ))}
+    </ul>
+  );
 }
 
 export default Checkout;
