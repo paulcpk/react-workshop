@@ -13,7 +13,7 @@ export default class Btn extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("componentDidMount");
+    console.log("Class");
 
     // state updated
     console.log("this.state.count", this.state.count);

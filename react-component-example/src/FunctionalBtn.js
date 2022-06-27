@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 
 function Btn() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(5);
+
+  useEffect(() => {
+    console.log("Functional");
+  }, []);
 
   useEffect(() => {
     console.log("Functional");
     console.log("count", count);
-  }, [count]);
+  }, [count, status, color]);
 
   return (
     <button
