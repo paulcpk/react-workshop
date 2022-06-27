@@ -11,8 +11,8 @@ import {
 import styles from './Counter.module.css';
 
 export function Counter() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
+  const count = useSelector(selectCount); // Getter
+  const dispatch = useDispatch(); // Setter
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   const incrementValue = Number(incrementAmount) || 0;
