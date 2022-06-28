@@ -1,16 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Btn renders correctly 1`] = `
-<button
-  onClick={[Function]}
+exports[`Car renders correctly 1`] = `
+<div
   style={
     Object {
-      "display": "block",
       "marginBottom": "1rem",
     }
   }
 >
-  Count: 
-  0
-</button>
+  Hi, I am a 
+  red
+   Car!
+</div>
 `;

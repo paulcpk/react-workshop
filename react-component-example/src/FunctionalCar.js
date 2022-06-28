@@ -8,7 +8,7 @@ const Car = ({ color }) => {
   }, []);
 
   return (
-    <div style={{ marginBottom: "1rem" }}>Hi, I am a {color} Car! 🚙</div>
+    <div style={{ marginBottom: "1rem" }}>Hi, I am a {color} Car!</div>
   );
 };
 

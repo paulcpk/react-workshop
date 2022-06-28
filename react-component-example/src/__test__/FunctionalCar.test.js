@@ -1,33 +1,21 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import renderer from "react-test-renderer";
-import Btn from "../FunctionalBtn";
+import Car from "../FunctionalCar";
 
-const BUTTON_INITIAL_COUNT = 0;
+const CAR_COLOR = "red";
 
 test("renders without crashing", () => {
-  render(<Btn />);
+  render(<Car />);
 });
 
-test("renders Count: 0", () => {
-  // preconditions / setup
-  render(<Btn />);
-  const btnText = screen.getByText(`Count: 0`);
-  // assertion
-  expect(btnText).toBeInTheDocument();
-});
-
-test("does not render Count: 1", () => {
-  // preconditions / setup
-  render(<Btn />);
-  //expect(() => screen.getByText(`Count: 1`)).toThrow();
-
-  const btnText = screen.queryByText(`Count: 1`);
-  // assertion
-  expect(btnText).not.toBeInTheDocument();
+test("renders car with correct text", () => {
+  render(<Car color={CAR_COLOR} />);
+  const linkElement = screen.getByText(`Hi, I am a ${CAR_COLOR} Car!`);
+  expect(linkElement).toBeInTheDocument();
 });
 
 // Snapshot test
-it("Btn renders correctly", () => {
-  const tree = renderer.create(<Btn />).toJSON();
+it("Car renders correctly", () => {
+  const tree = renderer.create(<Car color={CAR_COLOR} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
