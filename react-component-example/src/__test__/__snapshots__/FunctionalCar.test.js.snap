@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Btn renders correctly 1`] = `
+<button
+  onClick={[Function]}
+  style={
+    Object {
+      "display": "block",
+      "marginBottom": "2rem",
+    }
+  }
+>
+  Count: 
+  0
+</button>
+`;
