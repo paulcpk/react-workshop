@@ -6,7 +6,7 @@ exports[`Btn renders correctly 1`] = `
   style={
     Object {
       "display": "block",
-      "marginBottom": "2rem",
+      "marginBottom": "1rem",
     }
   }
 >

@@ -15,7 +15,7 @@ function Btn() {
   return (
     <button
       onClick={() => setCount(count + 1)}
-      style={{ display: "block", marginBottom: "2rem" }}
+      style={{ display: "block", marginBottom: "1rem" }}
     >
       Count: {count}
     </button>
