@@ -10,7 +10,7 @@ function Btn() {
   useEffect(() => {
     console.log("Functional");
     console.log("count", count);
-  }, [count, status, color]);
+  }, [count]);
 
   return (
     <button
