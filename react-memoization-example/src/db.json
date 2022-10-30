@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "color": "red",
+    "title": "BMW M320"
+  }, 
+  {
+    "id": 2,
+    "color": "gray",
+    "title": "Mazda MX5"
+  }, 
+  {
+    "id": 3,
+    "color": "blue",
+    "title": "Lotus Emira"
+  }, 
+  {
+    "id": 4,
+    "color": "gray",
+    "title": "Lada Riva"
+  }, 
+  {
+    "id": 5,
+    "color": "gray",
+    "title": "Mercedes C63 AMG"
+  }
+]

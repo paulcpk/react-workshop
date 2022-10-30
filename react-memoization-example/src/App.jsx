@@ -1,34 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useCallback, useEffect, useState } from "react";
+import "./App.css";
+
+const BASE_COUNT = 10;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(BASE_COUNT);
+
+  // load post data on initialization
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => res.json())
+      .then((res) => setPosts(res.splice(0, count)));
+  }, [count]);
+
+  const postList = () => {
+    console.log('run postList');
+    if (!posts) {
+      return 'Loading ...';
+    }
+
+    return (
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  const buttonHandle = (increase) => {
+    console.log('run buttonHandle');
+    let newCount = increase ? count + BASE_COUNT : count - BASE_COUNT;
+    // If count is smaller than 10, decrease no more
+    if (newCount < BASE_COUNT) {
+      newCount = BASE_COUNT;
+    }
+    setCount(newCount);
+  }
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Memoization using useCallback</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => buttonHandle(true)}>
+          Increase post count by 10
+        </button>
+        <button onClick={() => buttonHandle(false)}>
+          Decrease post count by 10
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+        Post count is {posts.length}
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className="class">{postList()}</div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
