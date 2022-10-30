@@ -1,27 +1,48 @@
 [
   {
     "id": 1,
-    "color": "red",
-    "title": "BMW M320"
+    "title": "BMW M320",
+    "specs": {
+        "color": "red",
+        "horsepower": 360,
+        "price": 160
+    }
   }, 
   {
     "id": 2,
-    "color": "gray",
-    "title": "Mazda MX5"
+    "title": "Mazda MX5",
+    "specs": {
+        "color": "gray",
+        "horsepower": 190,
+        "price": 110
+    }
   }, 
   {
     "id": 3,
-    "color": "blue",
-    "title": "Lotus Emira"
+    "title": "Lotus Emira",
+    "specs": {
+        "color": "blue",
+        "horsepower": 420,
+        "price": 220
+    }
   }, 
   {
     "id": 4,
     "color": "gray",
-    "title": "Lada Riva"
+    "title": "Lada Riva",
+    "specs": {
+        "color": "gray",
+        "horsepower": 60,
+        "price": 10
+    }
   }, 
   {
     "id": 5,
-    "color": "gray",
-    "title": "Mercedes C63 AMG"
+    "title": "Mercedes C63 AMG",
+    "specs": {
+        "color": "gray",
+        "horsepower": 580,
+        "price": 310
+    }
   }
 ]

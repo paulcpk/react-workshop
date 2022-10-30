@@ -1,59 +1,105 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
+import * as db from "./db.json";
 
-const BASE_COUNT = 10;
+const SELECT_DEFAULT_VALUE = "default";
+
+const COLOR_ICONS = {
+  blue: <span role="img">🚙</span>,
+  gray: <span role="img">🚓</span>,
+  red: <span role="img">🚗</span>
+};
 
 function App() {
   const [posts, setPosts] = useState([]);
-  const [count, setCount] = useState(BASE_COUNT);
+  const [filter, setFilter] = useState(SELECT_DEFAULT_VALUE);
+  const [expanded, setExpanded] = useState(0);
 
-  // load post data on initialization
+  // load mock post data on initialization
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
-      .then((res) => setPosts(res.splice(0, count)));
-  }, [count]);
+    // this could be loaded from an external API
+    setPosts(db.default);
+  }, []);
 
-  const postList = () => {
-    console.log('run postList');
+  const postSpecList = (specs) => {
+    return (
+      <ul className="post-spec-list">
+        {Object.keys(specs).map((key) => (
+          <li key={specs[key]}>
+            {key}: {specs[key]}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  const postList = useCallback(() => {
+    console.log("run postList");
     if (!posts) {
-      return 'Loading ...';
+      return "Loading...";
     }
 
     return (
-      <ul>
+      <ul className="post-list">
         {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
+          <li
+            key={post.id}
+            onClick={() => {
+              setExpanded(post.id);
+            }}
+          >
+            {COLOR_ICONS[post.specs.color]} {post.title}
+            {post.id === expanded && postSpecList(post.specs)}
+          </li>
         ))}
       </ul>
-    )
-  }
+    );
+  }, [posts, expanded]);
 
-  const buttonHandle = (increase) => {
-    console.log('run buttonHandle');
-    let newCount = increase ? count + BASE_COUNT : count - BASE_COUNT;
-    // If count is smaller than 10, decrease no more
-    if (newCount < BASE_COUNT) {
-      newCount = BASE_COUNT;
+  const renderSelect = useCallback(() => {
+    console.log("run renderSelect");
+    if (!posts) {
+      return "Loading...";
     }
-    setCount(newCount);
-  }
+
+    return (
+      <select
+        name="cars"
+        id="cars"
+        value={filter}
+        onChange={(e) => {
+          setFilter(e.target.value);
+        }}
+      >
+        <option key="default" value={SELECT_DEFAULT_VALUE}>
+          Pick a color
+        </option>
+        {Object.keys(COLOR_ICONS).map((color) => (
+          <option key={color} value={color}>
+            {color.toUpperCase()}
+          </option>
+        ))}
+      </select>
+    );
+  });
 
   return (
-    <div className="App">
+    <div className="app">
       <h1>Memoization using useCallback</h1>
       <div className="card">
-        <button onClick={() => buttonHandle(true)}>
-          Increase post count by 10
+        {renderSelect()}
+        <button onClick={() => setFilter(SELECT_DEFAULT_VALUE)}>
+          Reset filter
         </button>
-        <button onClick={() => buttonHandle(false)}>
-          Decrease post count by 10
-        </button>
-        <p>
-        Post count is {posts.length}
-        </p>
+        {filter && <p>Post filter is set to {filter}</p>}
       </div>
-      <div className="class">{postList()}</div>
+      <div className="card">
+        <button onClick={() => setExpanded(0)}>
+          Reset expanded details
+        </button>
+        {postList()}
+        <p>Car count is {posts.length}</p>
+      </div>
     </div>
   );
 }

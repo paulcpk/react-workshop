@@ -39,3 +39,26 @@
 .read-the-docs {
   color: #888;
 }
+
+.post-list {
+  text-align-last: left;
+}
+
+.post-list li {
+  padding-left: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+}
+
+.post-list > li {
+  cursor: pointer;
+}
+
+.post-list span {
+  margin-right: 0.5rem;
+}
+
+.post-spec-list {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
