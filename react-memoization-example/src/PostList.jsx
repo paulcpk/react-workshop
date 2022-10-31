@@ -7,7 +7,7 @@ export const COLOR_ICONS = {
 };
 
 const PostList = memo(({ posts, expanded, resetHandler, setExpandedHandler }) => {
-  console.log("run postList");
+  console.log("run postList component");
   if (!posts.length) {
     return <p>{"Loading..."}</p>;
   }
@@ -36,7 +36,6 @@ const PostList = memo(({ posts, expanded, resetHandler, setExpandedHandler }) =>
           </li>
         ))}
       </ul>
-      <p>Car count is {posts.length}</p>
     </>
   );
 });

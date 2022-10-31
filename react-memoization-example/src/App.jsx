@@ -34,55 +34,40 @@ function App() {
   //   setExpanded(id);
   // }, []);
 
+  // this isn't re-rendered, but re-initialized on every state change
   const postList = () => {
-    console.log("run postList");
+    console.log("run postList method");
     if (!posts.length) {
       return <p>{"Loading..."}</p>;
     }
 
     return (
-      <>
-        <button onClick={resetHandler}>Reset expanded details</button>
         <ul className="post-list">
           {posts.map((post) => (
             <li
               key={post.id}
-              onClick={() => {
-                setExpandedHandler(post.id);
-              }}
             >
               {COLOR_ICONS[post.specs.color]} {post.title}
-              {post.id === expanded && (
-                <ul className="post-spec-list">
-                  {Object.keys(post.specs).map((key) => (
-                    <li key={post.specs[key]}>
-                      {key}: {post.specs[key]}
-                    </li>
-                  ))}
-                </ul>
-              )}
             </li>
           ))}
         </ul>
-        <p>Car count is {posts.length}</p>
-      </>
     );
   };
 
   return (
     <div className="app">
-      <h1>Memoization using useCallback</h1>
+      <h1>Memoization with <br />useCallback  &amp; React.memo</h1>
       <div className="card">
-        {/* {postList()} */}
-        <PostList
+        {postList()}
+        {/* <PostList
           posts={posts}
           expanded={expanded}
           resetHandler={resetHandler}
           setExpandedHandler={setExpandedHandler}
-        />
+        /> */}
       </div>
       <div className="card">
-        <h2>Unrelated Counter method</h2>
+        <h2>Unrelated Counter</h2>
         <button onClick={() => setCount((curr) => curr + 1)}>Count +1</button>
         <p>Current counter is {count}</p>
       </div>
