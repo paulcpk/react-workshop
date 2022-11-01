@@ -1,16 +1,16 @@
-import { memo, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
 // const MyComponent = memo(function MyComponent(props) {
-//   console.log("props", props);
+//   console.log("MyComponent props", props);
 //   return <p>Hello, from MyComponent. The count is {props.count}</p>;
 // });
 
 function MyComponent(props) {
-  console.log("props", props);
+  console.log("MyComponent props", props);
   return <p>Hello, from MyComponent. The count is {props.count}</p>;
-};
+}
 
 // cpu intensive work
 const expensiveCalculation = (num) => {
@@ -25,8 +25,8 @@ const expensiveCalculation = (num) => {
 const DefaultTodos = () => {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState([]);
-  const calculation = expensiveCalculation(count);
-  // const calculation = useMemo(() => expensiveCalculation(count), [count]);
+  // const calculation = expensiveCalculation(count);
+  const calculation = useMemo(() => expensiveCalculation(count), [count]);
 
   const increment = () => {
     setCount((c) => c + 1);
@@ -36,10 +36,22 @@ const DefaultTodos = () => {
     setTodos((t) => [...t, "New Todo"]);
   };
 
+  // const renderAnotherComponent = () => {
+  //   console.log("renderAnotherComponent", count);
+  //   return <p>Hello, from renderAnotherComponent. The count is {count}</p>;
+  // } 
+  
+  // const renderAnotherComponent = useMemo(() => {
+  //   console.log("renderAnotherComponent", count);
+  //   return <p>Hello, from renderAnotherComponent. The count is {count}</p>;
+  // }, [count])
+
   return (
     <div>
       <div>
         <MyComponent count={count} />
+        {/* {renderAnotherComponent()} */}
+        {/* {renderAnotherComponent} */}
         <h2>My Todos</h2>
 
         {todos.map((todo, index) => {
