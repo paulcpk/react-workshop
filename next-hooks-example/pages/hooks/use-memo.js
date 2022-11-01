@@ -25,8 +25,8 @@ const expensiveCalculation = (num) => {
 const DefaultTodos = () => {
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState([]);
-  // const calculation = expensiveCalculation(count);
-  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+  const calculation = expensiveCalculation(count);
+  // const calculation = useMemo(() => expensiveCalculation(count), [count]);
 
   const increment = () => {
     setCount((c) => c + 1);
@@ -36,22 +36,16 @@ const DefaultTodos = () => {
     setTodos((t) => [...t, "New Todo"]);
   };
 
-  // const renderAnotherComponent = () => {
-  //   console.log("renderAnotherComponent", count);
-  //   return <p>Hello, from renderAnotherComponent. The count is {count}</p>;
-  // } 
-  
-  // const renderAnotherComponent = useMemo(() => {
-  //   console.log("renderAnotherComponent", count);
-  //   return <p>Hello, from renderAnotherComponent. The count is {count}</p>;
-  // }, [count])
+  const renderAnotherComponent = () => {
+    console.log("renderAnotherComponent", count);
+    return <p>Hello, from renderAnotherComponent. The count is {count}</p>;
+  } 
 
   return (
     <div>
       <div>
         <MyComponent count={count} />
-        {/* {renderAnotherComponent()} */}
-        {/* {renderAnotherComponent} */}
+        {renderAnotherComponent()}
         <h2>My Todos</h2>
 
         {todos.map((todo, index) => {
