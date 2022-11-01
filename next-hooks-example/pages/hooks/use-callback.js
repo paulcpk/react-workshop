@@ -3,7 +3,7 @@ import styles from "../../styles/Home.module.css";
 import hookStyles from "../../styles/Hooks.module.css";
 
 const DefaultTodos = ({ todos, addTodo }) => {
-  console.log("child render");
+  console.log("DefaultTodos render");
   return (
     <>
       <h2>My Todos</h2>

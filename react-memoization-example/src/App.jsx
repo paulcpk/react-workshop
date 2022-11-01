@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Memoization with <br />useCallback  &amp; React.memo</h1>
+      <h1>Memoization with <br />useCallback, useMemo  &amp; React.memo</h1>
       <div className="card">
         {postList()}
       </div>
