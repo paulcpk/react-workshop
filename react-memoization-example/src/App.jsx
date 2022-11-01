@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import * as db from "./db.json";
-import PostList, { COLOR_ICONS } from "./PostList";
+
+export const COLOR_ICONS = {
+  blue: <span role="img">🚙</span>,
+  gray: <span role="img">🚓</span>,
+  red: <span role="img">🚗</span>
+};
 
 function App() {
   const [count, setCount] = useState(0);
   const [posts, setPosts] = useState([]);
-  const [expanded, setExpanded] = useState(0);
-  // dummy state method
-  // const [foo, setFoo] = useState(0);
 
   // load mock post data on initialization
   useEffect(() => {
@@ -17,30 +19,6 @@ function App() {
       setPosts(db.default);
     }, 500);
   }, []);
-
-  // useEffect(() => {
-  //   // all this does is trigger a re-render
-  //   // let's assume we're doing a useful manipulation here
-  //   setFoo(count);
-  // }, [count]);
-
-  // we can assume this handlers do more complicated stuff
-  // and therefore should not be passed as inline functions
-  const resetHandler = () => {
-    setExpanded(0);
-  };
-
-  const setExpandedHandler = (id) => {
-    setExpanded(id);
-  };
-
-  // const resetHandler = useCallback(() => {
-  //   setExpanded(0);
-  // }, []);
-
-  // const setExpandedHandler = useCallback((id) => {
-  //   setExpanded(id);
-  // }, []);
 
   // this isn't re-rendered, but re-initialized on every state change
   const postList = () => {
@@ -67,12 +45,6 @@ function App() {
       <h1>Memoization with <br />useCallback  &amp; React.memo</h1>
       <div className="card">
         {postList()}
-        {/* <PostList
-          posts={posts}
-          expanded={expanded}
-          resetHandler={resetHandler}
-          setExpandedHandler={setExpandedHandler}
-        /> */}
       </div>
       <div className="card">
         <h2>Unrelated Counter</h2>
