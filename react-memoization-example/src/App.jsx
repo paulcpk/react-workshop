@@ -7,6 +7,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [posts, setPosts] = useState([]);
   const [expanded, setExpanded] = useState(0);
+  // dummy state method
+  // const [foo, setFoo] = useState(0);
 
   // load mock post data on initialization
   useEffect(() => {
@@ -15,6 +17,12 @@ function App() {
       setPosts(db.default);
     }, 500);
   }, []);
+
+  // useEffect(() => {
+  //   // all this does is trigger a re-render
+  //   // let's assume we're doing a useful manipulation here
+  //   setFoo(count);
+  // }, [count]);
 
   // we can assume this handlers do more complicated stuff
   // and therefore should not be passed as inline functions
