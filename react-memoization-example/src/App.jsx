@@ -1,6 +1,8 @@
+import { useCallback, useMemo } from 'react'
 import { useEffect, useState } from 'react'
 import './App.css'
 import * as db from './db.json'
+import PostList from './PostList'
 
 export const COLOR_ICONS = {
   blue: <span role="img">🚙</span>,
@@ -11,6 +13,7 @@ export const COLOR_ICONS = {
 function App() {
   const [count, setCount] = useState(0)
   const [posts, setPosts] = useState([])
+  const [expanded, setExpanded] = useState(0)
 
   // load mock post data on initialization
   useEffect(() => {
@@ -20,6 +23,16 @@ function App() {
     }, 1000)
   }, [])
 
+  // we can assume this handlers do more complicated stuff
+  // and therefore should not be passed as inline functions
+  const resetHandler = useCallback(() => {
+    setExpanded(0)
+  }, [])
+
+  const setExpandedHandler = useCallback((id) => {
+    setExpanded(id)
+  }, [])
+
   return (
     <div className="app">
       <h2>
@@ -27,13 +40,12 @@ function App() {
         useCallback, useMemo &amp; React.memo
       </h2>
       <div className="card">
-        <ul className="post-list">
-          {posts.map((post) => (
-            <li key={post.id}>
-              {COLOR_ICONS[post.specs.color]} {post.title}
-            </li>
-          ))}
-        </ul>
+        <PostList
+          posts={posts}
+          expanded={expanded}
+          resetHandler={resetHandler}
+          setExpandedHandler={setExpandedHandler}
+        />
       </div>
       <div className="card">
         <h2>Unrelated Counter</h2>
