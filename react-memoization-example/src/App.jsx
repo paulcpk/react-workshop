@@ -1,50 +1,39 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import "./App.css";
-import * as db from "./db.json";
+import { useEffect, useState } from 'react'
+import './App.css'
+import * as db from './db.json'
 
 export const COLOR_ICONS = {
   blue: <span role="img">🚙</span>,
   gray: <span role="img">🚓</span>,
-  red: <span role="img">🚗</span>
-};
+  red: <span role="img">🚗</span>,
+}
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(0)
+  const [posts, setPosts] = useState([])
 
   // load mock post data on initialization
   useEffect(() => {
     // this could be loaded from an external API
     setTimeout(() => {
-      setPosts(db.default);
-    }, 500);
-  }, []);
+      setPosts(db.default)
+    }, 1000)
+  }, [])
 
-  // this isn't re-rendered, but re-initialized on every state change
-  const postList = () => {
-    console.log("run postList method");
-    if (!posts.length) {
-      return <p>{"Loading..."}</p>;
-    }
-
-    return (
+  return (
+    <div className="app">
+      <h2>
+        Memoization with <br />
+        useCallback, useMemo &amp; React.memo
+      </h2>
+      <div className="card">
         <ul className="post-list">
           {posts.map((post) => (
-            <li
-              key={post.id}
-            >
+            <li key={post.id}>
               {COLOR_ICONS[post.specs.color]} {post.title}
             </li>
           ))}
         </ul>
-    );
-  };
-
-  return (
-    <div className="app">
-      <h1>Memoization with <br />useCallback, useMemo  &amp; React.memo</h1>
-      <div className="card">
-        {postList()}
       </div>
       <div className="card">
         <h2>Unrelated Counter</h2>
@@ -52,7 +41,7 @@ function App() {
         <p>Current counter is {count}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
