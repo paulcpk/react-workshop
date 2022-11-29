@@ -1,38 +1,39 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import "./App.css";
-import * as db from "./db.json";
-import PostList, { COLOR_ICONS } from "./PostList";
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import './App.css'
+import * as db from './db.json'
+import PostList, { COLOR_ICONS } from './PostList'
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [posts, setPosts] = useState([]);
-  const [expanded, setExpanded] = useState(0);
-  // dummy state method
-  // const [foo, setFoo] = useState(0);
+  const [count, setCount] = useState(0)
+  const [posts, setPosts] = useState([])
+  const [expanded, setExpanded] = useState(0)
+  // dummy state hooks
+  const [foo, setFoo] = useState(0)
 
   // load mock post data on initialization
   useEffect(() => {
     // this could be loaded from an external API
     setTimeout(() => {
-      setPosts(db.default);
-    }, 500);
-  }, []);
+      setPosts(db.default)
+    }, 500)
+  }, [])
 
-  // useEffect(() => {
-  //   // all this does is trigger a re-render
-  //   // let's assume we're doing a useful manipulation here
-  //   setFoo(count);
-  // }, [count]);
+  useEffect(() => {
+    // updating the state triggers a re-render
+    // let's assume we're doing a useful manipulation here
+    setFoo(count)
+    console.log('foo', foo)
+  }, [count, foo])
 
   // we can assume this handlers do more complicated stuff
   // and therefore should not be passed as inline functions
   const resetHandler = () => {
-    setExpanded(0);
-  };
+    setExpanded(0)
+  }
 
   const setExpandedHandler = (id) => {
-    setExpanded(id);
-  };
+    setExpanded(id)
+  }
 
   // const resetHandler = useCallback(() => {
   //   setExpanded(0);
@@ -44,27 +45,28 @@ function App() {
 
   // this isn't re-rendered, but re-initialized on every state change
   const postList = () => {
-    console.log("run postList method");
+    console.log('run postList method')
     if (!posts.length) {
-      return <p>{"Loading..."}</p>;
+      return <p>{'Loading...'}</p>
     }
 
     return (
-        <ul className="post-list">
-          {posts.map((post) => (
-            <li
-              key={post.id}
-            >
-              {COLOR_ICONS[post.specs.color]} {post.title}
-            </li>
-          ))}
-        </ul>
-    );
-  };
+      <ul className="post-list">
+        {posts.map((post) => (
+          <li key={post.id}>
+            {COLOR_ICONS[post.specs.color]} {post.title}
+          </li>
+        ))}
+      </ul>
+    )
+  }
 
   return (
     <div className="app">
-      <h1>Memoization with <br />useCallback  &amp; React.memo</h1>
+      <h1>
+        Memoization with <br />
+        useCallback &amp; React.memo
+      </h1>
       <div className="card">
         {postList()}
         {/* <PostList
@@ -80,7 +82,7 @@ function App() {
         <p>Current counter is {count}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
