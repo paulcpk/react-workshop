@@ -34,24 +34,24 @@ function App() {
   const [cities, setCities] = useState(staticData)
 
   const selected = parseInt(getUrlParams('selected'))
-  const loadServerDataFeature = getMockFeatureFlag()
+  const getDBDataFeature = getMockFeatureFlag()
 
   // load mock data on initialization
   useEffect(() => {
+    console.log('run useEffect in App.jsx')
     // this could be loaded from an external API
     setTimeout(() => {
-      if (loadServerDataFeature) {
+      if (getDBDataFeature) {
         setCities(db.default)
       } else {
         setCities(staticData)
       }
     }, 500)
-  }, [])
-
-  console.log('render')
+  }, [getDBDataFeature])
 
   return (
     <div className="app">
+      {console.log('Render App.jsx')}
       <h1>
         React.useEffect() &<br /> react-hooks/exhaustive-deps
       </h1>

@@ -2,9 +2,7 @@ import { useState, useEffect } from "react"
 
 const CityList =
   ({ cities, selected }) => {
-  const [loading, setLoading] = useState(true)
-    console.log('run CityList component')
-    console.log('selected', selected)
+    const [loading, setLoading] = useState(true)
 
     // do we need this?
     useEffect(() => {
@@ -24,6 +22,7 @@ const CityList =
 
     return (
         <ul className="post-list">
+          {console.log('Render CityList.jsx')}
           {cities.map((city) => (
             <li
               key={city.id}

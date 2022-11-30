@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import axios from "axios";
-
+import axios from 'axios'
 
 // Mock implementation for working with real time data
 const ChatAPI = {
@@ -16,19 +15,21 @@ const ChatAPI = {
   },
 }
 
-const User = (props) => {
+const User = ({ id }) => {
   const [isOnline, setIsOnline] = useState(null)
   let output = ''
 
   useEffect(() => {
-    function handleStatusChange(status) {
+    const handleStatusChange = (status) => {
       setIsOnline(status.isOnline)
     }
-    ChatAPI.subscribeToUserStatus(props.id, handleStatusChange)
+
+    ChatAPI.subscribeToUserStatus(id, handleStatusChange)
+
     return () => {
-      ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange)
+      ChatAPI.unsubscribeFromUserStatus(id, handleStatusChange)
     }
-  }, [])
+  }, [id])
 
   if (isOnline === null) {
     output = 'Loading...'
@@ -38,21 +39,21 @@ const User = (props) => {
 
   return (
     <div className="user">
-      🐵 User {props.id}: {output}
+      🐵 User {id}: {output}
     </div>
   )
 }
 
-function TodoList() {
+const TodoList = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/todos`)
       .then((result) => {
-        setData(result.data.slice(0, 10));
+        setData(result.data.slice(0, 10))
       })
-      .catch(console.error);
+      .catch(console.error)
   }, [])
 
   if (!data) {
@@ -76,9 +77,10 @@ function TodoList() {
   )
 }
 
-export default function ExampleApp() {
+const ExampleApp = () => {
   const [name, setName] = useState('World')
   const [showUsers, setShowUsers] = useState(true)
+  const [count, setCount] = useState(4)
 
   // use with caution -> might lead to rendering delays
   // useLayoutEffect(() => {
@@ -89,11 +91,11 @@ export default function ExampleApp() {
   useEffect(() => {
     console.log('execute useEffect()')
     document.title = `Bonjour, ${name}`
-  })
+  }, [name, count])
 
   return (
     <div className="app">
-      {console.log('render view')}
+      {console.log('Render ExampleApp.jsx')}
       <div className="card">
         <h1>Hello, {name}!</h1>
         <button onClick={() => setName('James')}>
@@ -117,6 +119,10 @@ export default function ExampleApp() {
           </>
         )}
 
+        <button onClick={() => setCount(count + 1)}>
+          Increment last user id {count}
+        </button>
+
         <button onClick={() => setShowUsers((previous) => !previous)}>
           Toggle User components
         </button>
@@ -124,3 +130,5 @@ export default function ExampleApp() {
     </div>
   )
 }
+
+export default ExampleApp
