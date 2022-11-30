@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 
 const CityList =
-  ({ cities }) => {
+  ({ cities, selected }) => {
   const [loading, setLoading] = useState(true)
     console.log('run CityList component')
+    console.log('selected', selected)
 
     // do we need this?
     useEffect(() => {
@@ -26,6 +27,9 @@ const CityList =
           {cities.map((city) => (
             <li
               key={city.id}
+              style={{
+                color: city.id === selected ? 'red' : 'black'
+              }}
             >
               {city.title} | {city.specs.country}
             </li>

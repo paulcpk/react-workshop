@@ -1,51 +1,50 @@
+import { useEffect, useLayoutEffect, useState } from 'react'
 import axios from "axios";
-import { useEffect, useLayoutEffect, useState } from "react";
-import styles from "../../styles/Home.module.css";
-import hookStyles from "../../styles/Hooks.module.css";
+
 
 // Mock implementation for working with real time data
 const ChatAPI = {
   subscribeToUserStatus(id, callback) {
     setTimeout(function () {
-      callback({ isOnline: true });
-      console.log(`User with id: ${id} has successfully subscribed`);
-    }, 1000);
+      callback({ isOnline: true })
+      console.log(`User with id: ${id} has successfully subscribed`)
+    }, 1000)
   },
   unsubscribeFromUserStatus(id, callback) {
-    callback({ isOnline: false });
-    console.log(`User with id: ${id} has successfully unsubscribed`);
+    callback({ isOnline: false })
+    console.log(`User with id: ${id} has successfully unsubscribed`)
   },
-};
+}
 
-function User(props) {
-  const [isOnline, setIsOnline] = useState(null);
-  let output = "";
+const User = (props) => {
+  const [isOnline, setIsOnline] = useState(null)
+  let output = ''
 
   useEffect(() => {
     function handleStatusChange(status) {
-      setIsOnline(status.isOnline);
+      setIsOnline(status.isOnline)
     }
-    ChatAPI.subscribeToUserStatus(props.id, handleStatusChange);
+    ChatAPI.subscribeToUserStatus(props.id, handleStatusChange)
     return () => {
-      ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange);
-    };
-  }, []);
+      ChatAPI.unsubscribeFromUserStatus(props.id, handleStatusChange)
+    }
+  }, [])
 
   if (isOnline === null) {
-    output = "Loading...";
+    output = 'Loading...'
   } else {
-    output = isOnline ? "Online" : "Offline";
+    output = isOnline ? 'Online' : 'Offline'
   }
 
   return (
-    <div className={hookStyles.user}>
+    <div className="user">
       🐵 User {props.id}: {output}
     </div>
-  );
+  )
 }
 
 function TodoList() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
 
   useEffect(() => {
     axios
@@ -54,10 +53,10 @@ function TodoList() {
         setData(result.data.slice(0, 10));
       })
       .catch(console.error);
-  }, []);
+  }, [])
 
   if (!data) {
-    return null;
+    return <p>Loading...</p>
   }
 
   return (
@@ -66,7 +65,7 @@ function TodoList() {
         <li key={todo.id}>
           <span
             style={{
-              textDecoration: todo.completed ? "line-through" : "none",
+              textDecoration: todo.completed ? 'line-through' : 'none',
             }}
           >
             {todo.title}
@@ -74,36 +73,40 @@ function TodoList() {
         </li>
       ))}
     </ul>
-  );
+  )
 }
 
-export default function App() {
-  const [name, setName] = useState("World");
-  const [showUsers, setShowUsers] = useState(true);
+export default function ExampleApp() {
+  const [name, setName] = useState('World')
+  const [showUsers, setShowUsers] = useState(true)
 
   // use with caution -> might lead to rendering delays
-  useLayoutEffect(() => {
-    console.log("execute useLayoutEffect()");
-    document.title = `Hello, ${name}`;
-  });
+  // useLayoutEffect(() => {
+  //   console.log("execute useLayoutEffect()");
+  //   document.title = `Hello, ${name}`;
+  // });
 
   useEffect(() => {
-    console.log("execute useEffect()");
-    document.title = `Bonjour, ${name}`;
-  });
+    console.log('execute useEffect()')
+    document.title = `Bonjour, ${name}`
+  })
 
   return (
-    <div className={styles.container}>
+    <div className="app">
       {console.log('render view')}
-      <main className={styles.main}>
+      <div className="card">
         <h1>Hello, {name}!</h1>
-        <button onClick={() => setName("James")}>
+        <button onClick={() => setName('James')}>
           Click me to change the name
         </button>
+      </div>
 
+      <div className="card">
         <h2>Todo List API call</h2>
         <TodoList />
+      </div>
 
+      <div className="card">
         <h2>Subscribe/Unsubscribe</h2>
 
         {showUsers && (
@@ -117,7 +120,7 @@ export default function App() {
         <button onClick={() => setShowUsers((previous) => !previous)}>
           Toggle User components
         </button>
-      </main>
+      </div>
     </div>
-  );
+  )
 }

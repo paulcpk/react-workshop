@@ -1,48 +1,54 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import './App.css'
 import * as db from './db.json'
 import CityList from './CityList'
 
-function getMockFeatureFlag() {
-  return false;
+// Mock feature flag implementation
+const getMockFeatureFlag = () => false
+
+const getUrlParams = (id) => {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  return urlParams.get(id)
 }
+
+const staticData = [
+  {
+    id: 1,
+    title: 'Munich',
+    specs: {
+      country: 'Germany',
+    },
+  },
+  {
+    id: 2,
+    title: 'Oslo',
+    specs: {
+      country: 'Norway',
+    },
+  },
+]
 
 function App() {
   const [count, setCount] = useState(0)
-  const [cities, setCities] = useState([])
-  const useServerData = getMockFeatureFlag()
+  const [cities, setCities] = useState(staticData)
 
-
-  const staticData = [
-    {
-      id: 1,
-      title: "Munich",
-      specs: {
-        country: "Germany",
-      },
-    },
-    {
-      id: 2,
-      title: "Oslo",
-      specs: {
-        country: "Norway",
-      },
-    },
-  ];
+  const selected = parseInt(getUrlParams('selected'))
+  const loadServerDataFeature = getMockFeatureFlag()
 
   // load mock data on initialization
   useEffect(() => {
-    if (useServerData) {
-      // this could be loaded from an external API
-      setTimeout(() => {
+    // this could be loaded from an external API
+    setTimeout(() => {
+      if (loadServerDataFeature) {
         setCities(db.default)
-      }, 500)
-    } else {
-      setCities(staticData)
-    }
+      } else {
+        setCities(staticData)
+      }
+    }, 500)
   }, [])
 
-  console.log('render');
+  console.log('render')
 
   return (
     <div className="app">
@@ -50,9 +56,7 @@ function App() {
         React.useEffect() &<br /> react-hooks/exhaustive-deps
       </h1>
       <div className="card">
-        <CityList
-          cities={cities}
-        />
+        <CityList cities={cities} selected={selected} />
       </div>
       <div className="card">
         <h2>Unrelated Counter</h2>
