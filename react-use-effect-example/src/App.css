@@ -1,0 +1,56 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.post-list {
+  text-align-last: left;
+}
+
+.post-list li {
+  padding-left: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+}
+
+.post-list > li {
+  cursor: pointer;
+}
+
+.post-list span {
+  margin-right: 0.5rem;
+}
+
+.post-spec-list {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.counter {
+  padding-bottom: 3rem;
+}
+
+.user {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav ul li {
+  display: inline-block;
+  margin: 1rem;
+}

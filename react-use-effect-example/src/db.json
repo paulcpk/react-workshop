@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Munich",
+    "specs": {
+      "country": "Germany",
+      "weather": "moderate",
+      "flights": 14
+    }
+  },
+  {
+    "id": 2,
+    "title": "Oslo",
+    "specs": {
+      "country": "Norway",
+      "weather": "cold",
+      "flights": 2
+    }
+  },
+  {
+    "id": 3,
+    "title": "Berlin",
+    "specs": {
+      "country": "Germany",
+      "weather": "cold",
+      "flights": 43
+    }
+  },
+  {
+    "id": 4,
+    "title": "Phoenix, AZ",
+    "specs": {
+      "country": "USA",
+      "weather": "hot",
+      "flights": 23
+    }
+  }
+]
